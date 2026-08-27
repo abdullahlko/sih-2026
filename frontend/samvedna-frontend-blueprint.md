@@ -1,7 +1,7 @@
-# The Stunning Frontend Blueprint for "Samvedna AI" (Sahyog)
+# The Stunning Frontend Blueprint for "Samvedna AI"
 ## Tailored for React, Tailwind CSS, and a Winning SIH Presentation
 
-To secure the **1st Place** at the Smart India Hackathon, your frontend cannot just be "functional"—it must look **incredibly premium, modern, and production-ready**. 
+To secure the **1st Place** at the Smart India Hackathon, your frontend cannot just be "functional"-it must look **incredibly premium, modern, and production-ready**. 
 
 The judges must feel like they are looking at a real, live application ready to be deployed by the Ministry of Social Justice and Empowerment (MoSJE).
 
