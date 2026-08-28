@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from app.core.security import get_password_hash
 
 class Token(BaseModel):
     access_token: str
@@ -18,3 +19,17 @@ class VictimCaseResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class VictimRegister(BaseModel):
+    phone_number: str
+    password: str
+    full_name: str
+    nhaa_case_id: str
+    preferred_language: str = "hi"
+
+class CounselorRegister(BaseModel):
+    email: str
+    password: str
+    full_name: str
+    district: str
+    specialization: Optional[str] = None
