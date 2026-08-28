@@ -1,2 +1,5 @@
 .venv/
 .env
+# Ignore Python compiled bytecode files inside the migrations folder
+backend/app/migrations/__pycache__/
+backend/app/migrations/versions/__pycache__/
