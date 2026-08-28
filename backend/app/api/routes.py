@@ -110,3 +110,59 @@ async def register_counselor(
     
     await db.commit()
     return {"message": "Counselor registered successfully"}
+
+# ---------------------------------------------------------
+# 2. Victim Routes
+# ---------------------------------------------------------
+
+@router.post("/victims/check-in")
+async def submit_check_in(
+    data: CheckInCreate,
+    current_user: User = Depends(require_role(UserRole.VICTIM)),
+    db: AsyncSession = Depends(get_async_session)
+):
+    """
+    Receives raw text or audio URLs from the victim. 
+    In the next phase, we will offload this to Celery for AI processing.
+    """
+    # Verify victim profile exists
+    stmt = select(VictimProfile).where(VictimProfile.user_id == current_user.id)
+    result = await db.execute(stmt)
+    victim = result.scalars().first()
+
+    if not victim:
+        raise HTTPException(status_code=404, detail="Victim profile not found")
+
+    # TODO: Save to InteractionLog, trigger Celery task for NLP/Voice Stress Analysis
+    
+    return {
+        "status": "success", 
+        "message": "Check-in received and queued for analysis."
+    }
+
+# ---------------------------------------------------------
+# 3. Counselor Routes
+# ---------------------------------------------------------
+
+@router.get("/counselors/my-cases", response_model=List[VictimCaseResponse])
+async def get_assigned_cases(
+    current_user: User = Depends(require_role(UserRole.COUNSELOR)),
+    db: AsyncSession = Depends(get_async_session)
+):
+    """
+    Returns all victims assigned to the currently authenticated counselor.
+    """
+    # 1. Find the counselor profile
+    stmt = select(CounselorProfile).where(CounselorProfile.user_id == current_user.id)
+    result = await db.execute(stmt)
+    counselor = result.scalars().first()
+
+    if not counselor:
+        raise HTTPException(status_code=404, detail="Counselor profile not found")
+
+    # 2. Fetch assigned victims
+    cases_stmt = select(VictimProfile).where(VictimProfile.counselor_id == counselor.id)
+    cases_result = await db.execute(cases_stmt)
+    assigned_victims = cases_result.scalars().all()
+
+    return assigned_victims

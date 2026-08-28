@@ -9,7 +9,8 @@ from alembic import context
 
 # Import your Base metadata so Alembic knows what your models look like
 from db.base import Base
-from backend.app.core.config import settings
+import db.models
+from core.config import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -70,6 +71,8 @@ async def run_async_migrations() -> None:
     and associate a connection with the context.
 
     """
+
+    config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
     connectable = async_engine_from_config(
         config.get_section(config.config_ini_section, {}),

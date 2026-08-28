@@ -3,3 +3,5 @@
 # Ignore Python compiled bytecode files inside the migrations folder
 backend/app/migrations/__pycache__/
 backend/app/migrations/versions/__pycache__/
+backend/app/core/__pycache__/
+backend/app/db/__pycache__/
