@@ -1,5 +1,9 @@
 from pydantic_settings import BaseSettings
 from typing import Optional
+from pathlib import Path
+
+# This dynamically navigates up 4 levels: core -> app -> backend -> sih26
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Sahyog API"
@@ -14,6 +18,6 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql://postgres:password@localhost:5432/sahyog_db"
 
     class Config:
-        env_file = ".env"
+        env_file = str(ROOT_DIR / ".env")
 
 settings = Settings()
