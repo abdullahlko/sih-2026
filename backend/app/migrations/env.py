@@ -9,10 +9,7 @@ from alembic import context
 
 # Import your Base metadata so Alembic knows what your models look like
 from db.base import Base
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
+from backend.app.core.config import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -47,7 +44,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = os.getenv("DATABASE_URL")
+    url = settings.DATABASE_URL
     if not url:
         raise ValueError("DATABASE_URL environment variable is not set")
     context.configure(
