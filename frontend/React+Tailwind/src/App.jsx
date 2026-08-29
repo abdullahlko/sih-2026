@@ -1,6 +1,7 @@
 import React from 'react';
 import { SimulationProvider, useSimulation, VIEWS, SIMULATION_STATES } from './context/SimulationContext';
 import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 import SimulationControlPanel from './components/layout/SimulationControlPanel';
 import DpdpModal from './components/layout/DpdpModal';
 import CitizenPortal from './components/citizen/CitizenPortal';
@@ -78,20 +79,7 @@ function MainAppShell() {
       </main>
 
       {/* 4. Footer with MoSJE Institutional Footer & DPDP Modal Trigger */}
-      <footer className="mt-auto border-t border-purple-200/80 bg-white/75 backdrop-blur-md py-5 text-center text-xs text-purple-900/70 relative z-20">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5 text-purple-950 font-bold">
-            <div className="w-6 h-6 rounded-lg bg-linear-to-tr from-purple-600 to-indigo-600 p-0.5 shadow-sm">
-              <img src="/favicon.png" alt="Samvedna AI" className="w-full h-full object-contain rounded-md" />
-            </div>
-            <span className="font-heading font-extrabold tracking-tight">Samvedna AI</span>
-          </div>
-
-          <div className="text-[11px] text-purple-800/70 font-medium">
-            Ministry of Social Justice and Empowerment (MoSJE), Govt. of India • SC/ST Protection & Trauma Relief System
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* 5. Floating Developer Demo Simulation Switchboard */}
       <SimulationControlPanel />
