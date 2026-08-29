@@ -7,7 +7,7 @@ import {
   Send, 
   Sparkles, 
   ShieldAlert, 
-  CheckCircle2,
+  CheckCircle2, 
   AlertTriangle,
   Zap,
   RefreshCw,
@@ -82,12 +82,12 @@ export default function IvrsSmsConsole() {
   };
 
   return (
-    <div className="rounded-3xl bg-slate-950 text-white border border-slate-800 shadow-xl p-5 sm:p-6 space-y-5">
+    <div className="clay-card-dark p-6 sm:p-7 space-y-5 text-white">
       
       {/* Console Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-indigo-900/60 border border-indigo-500/40 flex items-center justify-center text-indigo-300">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-purple-900/60">
+        <div className="flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-2xl bg-linear-to-tr from-purple-900 to-indigo-900 border border-purple-500/40 flex items-center justify-center text-purple-300 shadow-sm">
             <Terminal className="w-5 h-5" />
           </div>
           <div>
@@ -96,13 +96,13 @@ export default function IvrsSmsConsole() {
                 IVRS & SMS Fallback Ingestion Console
               </h3>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-purple-200/70 mt-0.5">
               Processes distress signals from rural victims without smartphones or active internet connections.
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 font-mono text-xs">
+        <div className="flex items-center gap-2.5 font-mono text-xs bg-black/30 px-3 py-1.5 rounded-full border border-purple-900/60">
           <span className="flex h-2 w-2 relative">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -113,34 +113,34 @@ export default function IvrsSmsConsole() {
 
       {/* Live Flash Ticker Banner when new SMS simulated */}
       {isFlashing && (
-        <div className="p-3 rounded-2xl bg-rose-600 text-white text-xs font-mono font-bold flex items-center gap-2 shadow-lg animate-bounce">
+        <div className="p-3.5 rounded-2xl bg-linear-to-r from-rose-600 to-purple-600 text-white text-xs font-mono font-bold flex items-center gap-2.5 shadow-xl animate-spring-pop">
           <AlertTriangle className="w-4 h-4 text-amber-300 shrink-0" />
           <span className="truncate">{flashMessage}</span>
-          <span className="ml-auto text-[10px] bg-black/30 px-2 py-0.5 rounded">LATENCY: 42ms</span>
+          <span className="ml-auto text-[10px] bg-black/40 px-2.5 py-0.5 rounded-full">LATENCY: 42ms</span>
         </div>
       )}
 
-      {/* Interactive SMS Simulator Deck */}
-      <div className="p-4 rounded-2xl bg-slate-900 border border-indigo-900/40 space-y-3">
+      {/* Interactive SMS Simulator Deck with Clay Styling */}
+      <div className="p-4.5 rounded-3xl bg-linear-to-br from-[#1c133a] to-[#110a26] border border-purple-900/60 space-y-3 shadow-md">
         <div className="flex items-center justify-between text-xs">
-          <span className="font-bold text-indigo-300 flex items-center gap-1.5 font-heading">
-            <Smartphone className="w-4 h-4 text-indigo-400" />
+          <span className="font-bold text-purple-200 flex items-center gap-2 font-heading">
+            <Smartphone className="w-4 h-4 text-[#8c65ff]" />
             <span>Interactive SMS Intake Simulator</span>
           </span>
         </div>
 
-        <form onSubmit={handleSimulateSms} className="flex flex-col sm:flex-row gap-2">
+        <form onSubmit={handleSimulateSms} className="flex flex-col sm:flex-row gap-2.5">
           <input
             type="text"
             value={smsInput}
             onChange={(e) => setSmsInput(e.target.value)}
             placeholder="Enter victim SMS text (e.g. Gunde court ke bahar dhamki de rahe hain)..."
-            className="flex-1 px-4 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
+            className="flex-1 px-4 py-2.5 rounded-2xl bg-[#0e071e] border border-purple-800/80 text-xs text-white placeholder:text-purple-400/60 focus:outline-none focus:ring-2 focus:ring-[#704fe6] font-mono shadow-inner"
           />
 
           <button
             type="submit"
-            className="px-4 py-2 rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold font-mono flex items-center justify-center gap-1.5 shadow-md shadow-indigo-900/30 transition-all cursor-pointer shrink-0"
+            className="clay-btn clay-btn-primary px-5 py-2.5 text-white text-xs font-bold font-mono flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
           >
             <Send className="w-3.5 h-3.5" />
             <span>Inbound SMS Link</span>
@@ -149,42 +149,42 @@ export default function IvrsSmsConsole() {
       </div>
 
       {/* Terminal Telephony Feed */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
+      <div className="space-y-2.5">
+        <div className="flex items-center justify-between text-xs text-purple-300 font-mono">
           <span>REAL-TIME INBOUND TELEPHONY LOGS</span>
         </div>
 
-        <div className="space-y-2 max-h-52 overflow-y-auto pr-1">
+        <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
           {logs.map((item) => (
             <div
               key={item.id}
-              className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all text-xs font-mono flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+              className="p-3.5 rounded-2xl bg-[#1a1236]/90 border border-purple-900/60 hover:border-purple-600 transition-all text-xs font-mono flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 shadow-xs"
             >
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-800/80">
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800">
                     {item.channel}
                   </span>
-                  <span className="text-slate-300 font-semibold">{item.sender}</span>
-                  <span className="text-slate-500">({item.district})</span>
+                  <span className="text-purple-100 font-semibold">{item.sender}</span>
+                  <span className="text-purple-400">({item.district})</span>
                 </div>
 
-                <div className="text-slate-200">
-                  <span className="text-slate-400">Raw:</span> "{item.rawText}"
+                <div className="text-purple-100">
+                  <span className="text-purple-400">Raw:</span> "{item.rawText}"
                 </div>
 
-                <div className="text-indigo-300 text-[11px]">
+                <div className="text-purple-300 text-[11px]">
                   → {item.nlpParsed}
                 </div>
               </div>
 
-              <div className="flex sm:flex-col items-center sm:items-end justify-between gap-1 shrink-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-800">
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+              <div className="flex sm:flex-col items-center sm:items-end justify-between gap-1 shrink-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-purple-900/60">
+                <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
                   item.threatScore > 75 ? 'bg-rose-950 text-rose-300 border border-rose-800' : 'bg-emerald-950 text-emerald-300'
                 }`}>
                   Distress: {item.threatScore}%
                 </span>
-                <span className="text-[10px] text-slate-500">{item.timestamp}</span>
+                <span className="text-[10px] text-purple-400">{item.timestamp}</span>
               </div>
             </div>
           ))}

@@ -3,6 +3,9 @@
 @layer base {
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #241c40;
+    background-color: #f7f5ff;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6, .font-heading {
@@ -14,57 +17,278 @@
   }
 }
 
-@keyframes subtle-pulse {
+
+/* 1. Core Claymorphic Cards */
+.clay-card {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1px solid rgba(216, 207, 255, 0.7);
+  box-shadow: 
+    0 16px 32px -8px rgba(112, 79, 230, 0.12),
+    0 4px 12px -2px rgba(99, 66, 235, 0.05),
+    inset 2px 2px 5px rgba(255, 255, 255, 1),
+    inset -2px -2px 6px rgba(140, 101, 255, 0.08);
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.clay-card:hover {
+  box-shadow: 
+    0 22px 40px -10px rgba(112, 79, 230, 0.18),
+    0 6px 16px -2px rgba(99, 66, 235, 0.08),
+    inset 2px 2px 6px rgba(255, 255, 255, 1),
+    inset -2px -2px 7px rgba(140, 101, 255, 0.12);
+}
+
+/* 2. Soft Tinted Lavender Clay Card */
+.clay-card-lavender {
+  background: linear-gradient(135deg, #faf8ff 0%, #f1ecfe 100%);
+  border-radius: 28px;
+  border: 1px solid rgba(197, 182, 255, 0.75);
+  box-shadow: 
+    0 14px 28px -6px rgba(112, 79, 230, 0.14),
+    inset 2px 2px 5px rgba(255, 255, 255, 0.95),
+    inset -2px -2px 6px rgba(120, 87, 255, 0.1);
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 3. Hero Deep Lavender Clay Card */
+.clay-card-hero {
+  background: linear-gradient(135deg, #4f2bd6 0%, #6342eb 40%, #7d54f5 100%);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 24px 48px -12px rgba(99, 66, 235, 0.35),
+    0 10px 20px -4px rgba(79, 43, 214, 0.2),
+    inset 2px 2px 6px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 6px rgba(45, 18, 140, 0.3);
+}
+
+/* 4. Dark Theme Clay Card (Command Center / Heatmap) */
+.clay-card-dark {
+  background: linear-gradient(145deg, #18132e 0%, #110d24 100%);
+  border-radius: 28px;
+  border: 1px solid rgba(140, 101, 255, 0.25);
+  box-shadow: 
+    0 20px 40px -10px rgba(17, 13, 36, 0.6),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.12),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* 5. Tactile Clay Buttons */
+.clay-btn {
+  border-radius: 18px;
+  font-weight: 700;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 
+    0 8px 16px -4px rgba(112, 79, 230, 0.15),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.8),
+    inset -1.5px -1.5px 4px rgba(112, 79, 230, 0.12);
+  cursor: pointer;
+}
+
+.clay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 20px -4px rgba(112, 79, 230, 0.22),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.9),
+    inset -1.5px -1.5px 4px rgba(112, 79, 230, 0.15);
+}
+
+.clay-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 
+    0 4px 8px -2px rgba(112, 79, 230, 0.15),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.clay-btn-primary {
+  background: linear-gradient(135deg, #704fe6 0%, #5a34e3 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 22px -6px rgba(99, 66, 235, 0.45),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.4),
+    inset -1.5px -1.5px 4px rgba(35, 12, 120, 0.3);
+}
+
+.clay-btn-primary:hover {
+  background: linear-gradient(135deg, #7e5ef2 0%, #633bec 100%);
+  box-shadow: 
+    0 14px 26px -6px rgba(99, 66, 235, 0.55),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.5),
+    inset -1.5px -1.5px 4px rgba(35, 12, 120, 0.3);
+}
+
+.clay-btn-danger {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 10px 22px -6px rgba(225, 29, 72, 0.45),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.4),
+    inset -1.5px -1.5px 4px rgba(159, 18, 57, 0.3);
+}
+
+/* 6. Clay Badges & Pills */
+.clay-pill {
+  border-radius: 9999px;
+  box-shadow: 
+    0 4px 10px -2px rgba(112, 79, 230, 0.12),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 3px rgba(112, 79, 230, 0.08);
+}
+
+.clay-pill-lavender {
+  background: linear-gradient(135deg, #f1ecfe 0%, #e5dcfe 100%);
+  color: #552ddb;
+  border: 1px solid rgba(197, 182, 255, 0.7);
+}
+
+/* 7. Clay Icon Container */
+.clay-icon {
+  border-radius: 18px;
+  box-shadow: 
+    0 6px 14px -3px rgba(112, 79, 230, 0.16),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.95),
+    inset -1.5px -1.5px 4px rgba(112, 79, 230, 0.1);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.clay-icon:hover {
+  transform: scale(1.08) rotate(3deg);
+}
+
+/* 8. Clay Inputs */
+.clay-input {
+  background: #fdfcff;
+  border-radius: 20px;
+  border: 1.5px solid rgba(210, 199, 255, 0.8);
+  box-shadow: 
+    inset 2px 2px 5px rgba(112, 79, 230, 0.06),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+.clay-input:focus {
+  background: #ffffff;
+  border-color: #6d46eb;
+  box-shadow: 
+    0 0 0 4px rgba(112, 79, 230, 0.15),
+    inset 1px 1px 3px rgba(112, 79, 230, 0.05);
+}
+
+
+
+@keyframes float-gentle {
   0%, 100% {
-    opacity: 1;
-    transform: scale(1);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    opacity: 0.85;
-    transform: scale(1.03);
+    transform: translateY(-10px) rotate(2deg);
   }
 }
 
-@keyframes wave-bar {
+@keyframes float-reverse {
   0%, 100% {
-    height: 6px;
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    height: 24px;
+    transform: translateY(10px) rotate(-2deg);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(20px, -20px) scale(1.06);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.95);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes wave-bounce {
+  0%, 100% {
+    height: 8px;
+  }
+  50% {
+    height: 32px;
   }
 }
 
 @keyframes emergency-glow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.35);
+    box-shadow: 0 0 20px rgba(244, 63, 94, 0.4), 0 0 40px rgba(112, 79, 230, 0.2);
   }
   50% {
-    box-shadow: 0 0 30px rgba(239, 68, 68, 0.7);
+    box-shadow: 0 0 35px rgba(244, 63, 94, 0.75), 0 0 60px rgba(112, 79, 230, 0.45);
   }
+}
+
+@keyframes spring-pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-float {
+  animation: float-gentle 5s infinite ease-in-out;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 6s infinite ease-in-out;
+}
+
+.animate-float-slow {
+  animation: float-slow 14s infinite ease-in-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 6s infinite ease-in-out;
 }
 
 .animate-emergency-glow {
   animation: emergency-glow 2s infinite ease-in-out;
 }
 
-.glass-panel {
+.animate-spring-pop {
+  animation: spring-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Glass panel with lavender tint */
+.glass-panel-lavender {
   background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(224, 231, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(216, 207, 255, 0.75);
 }
 
-.glass-panel-dark {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-}
-
-/* Custom scrollbars */
+/* Custom scrollbars with lavender tone */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -72,10 +296,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.35);
+  background: rgba(167, 139, 250, 0.45);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.5);
+  background: rgba(124, 58, 237, 0.7);
 }

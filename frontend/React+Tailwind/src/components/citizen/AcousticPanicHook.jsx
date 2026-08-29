@@ -67,12 +67,12 @@ export default function AcousticPanicHook() {
   const isCritical = simulationState === SIMULATION_STATES.CRITICAL_VOICE || (showAnalysis && statePayload.distressScore > 70);
 
   return (
-    <div className="rounded-3xl bg-white border border-indigo-100 shadow-md p-5 sm:p-6 space-y-5 transition-all">
+    <div className="clay-card p-5 sm:p-6 space-y-5 transition-all">
       
       {/* Header */}
-      <div className="flex items-start justify-between gap-3 pb-4 border-b border-slate-100">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-linear-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-purple-200 shrink-0">
+      <div className="flex items-start justify-between gap-3 pb-4 border-b border-purple-100">
+        <div className="flex items-center gap-3.5">
+          <div className="clay-icon w-11 h-11 bg-linear-to-tr from-[#6342eb] to-[#7d54f5] flex items-center justify-center text-white shrink-0">
             <Activity className="w-5 h-5" />
           </div>
           <div>
@@ -81,7 +81,7 @@ export default function AcousticPanicHook() {
                 Acoustic Distress & Vocal Tremor Analyzer
               </h2>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-purple-900/70 mt-0.5">
               Extracts micro-tremors and vocal cord tension for early trauma detection.
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function AcousticPanicHook() {
               setIsRecording(false);
               setRecordSeconds(0);
             }}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+            className="p-2 rounded-xl text-purple-400 hover:text-purple-700 hover:bg-purple-50 transition-all cursor-pointer"
             title="Reset Voice Analysis"
           >
             <RefreshCw className="w-4 h-4" />
@@ -103,37 +103,37 @@ export default function AcousticPanicHook() {
       </div>
 
       {/* Interactive Microphone & Waveform Deck */}
-      <div className={`p-6 rounded-2xl text-center transition-all duration-300 ${
+      <div className={`p-6 rounded-3xl text-center transition-all duration-300 ${
         isRecording 
-          ? 'bg-linear-to-b from-purple-950 via-indigo-950 to-slate-900 text-white shadow-inner' 
+          ? 'bg-linear-to-b from-[#2a1354] via-[#1c0d3a] to-[#120827] text-white shadow-2xl border border-purple-500/40' 
           : showAnalysis
-            ? 'bg-slate-900 text-white'
-            : 'bg-linear-to-b from-indigo-50/50 to-slate-50 border border-indigo-100/60'
+            ? 'bg-linear-to-b from-[#18132e] to-[#110d24] text-white shadow-xl border border-purple-900/50'
+            : 'bg-linear-to-b from-[#faf8ff] to-[#f2ecfe] border border-purple-200/80 shadow-inner'
       }`}>
         
-        {/* Large Pulse Button */}
+        {/* Large Pulse Button with Lavender Clay & Ripple */}
         <div className="relative inline-flex items-center justify-center mb-4">
           {/* Animated glow aura when recording */}
           {isRecording && (
             <>
-              <span className="animate-ping absolute inline-flex h-24 w-24 rounded-full bg-purple-500 opacity-40"></span>
-              <span className="animate-pulse absolute inline-flex h-20 w-20 rounded-full bg-rose-500 opacity-30"></span>
+              <span className="animate-ping absolute inline-flex h-24 w-24 rounded-full bg-purple-400 opacity-40"></span>
+              <span className="animate-pulse absolute inline-flex h-20 w-20 rounded-full bg-rose-500 opacity-35"></span>
             </>
           )}
 
           <button
             id="acoustic-mic-record-btn"
             onClick={toggleRecording}
-            className={`relative z-10 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex flex-col items-center justify-center text-white shadow-lg transition-transform active:scale-95 cursor-pointer ${
+            className={`relative z-10 w-18 h-18 sm:w-22 sm:h-22 rounded-full flex flex-col items-center justify-center text-white shadow-xl transition-all duration-200 active:scale-95 cursor-pointer ${
               isRecording
-                ? 'bg-linear-to-tr from-rose-600 to-purple-600 ring-4 ring-purple-400/40 shadow-rose-500/50'
-                : 'bg-linear-to-tr from-indigo-600 to-purple-700 hover:from-indigo-700 hover:to-purple-800 shadow-indigo-500/30'
+                ? 'bg-linear-to-tr from-rose-600 to-purple-600 ring-4 ring-purple-400/50 shadow-rose-500/50'
+                : 'bg-linear-to-tr from-[#6342eb] to-[#8c65ff] hover:from-[#5932ea] hover:to-[#7857ff] shadow-purple-500/35 hover:scale-105'
             }`}
           >
             {isRecording ? (
-              <MicOff className="w-7 h-7 sm:w-8 sm:h-8 animate-pulse" />
+              <MicOff className="w-8 h-8 sm:w-9 sm:h-9 animate-pulse" />
             ) : (
-              <Mic className="w-7 h-7 sm:w-8 sm:h-8" />
+              <Mic className="w-8 h-8 sm:w-9 sm:h-9" />
             )}
           </button>
         </div>
@@ -146,7 +146,7 @@ export default function AcousticPanicHook() {
               <span>LIVE AUDIO ANALYSIS IN PROGRESS • 00:0{recordSeconds}s</span>
             </div>
 
-            <p className="text-xs text-indigo-200 max-w-sm mx-auto">
+            <p className="text-xs text-purple-200 max-w-sm mx-auto">
               Please speak freely: "Hum darre hue hain, kripya sahayata bhejein..."
             </p>
 
@@ -166,7 +166,7 @@ export default function AcousticPanicHook() {
 
             <button
               onClick={toggleRecording}
-              className="mt-3 px-4 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-semibold backdrop-blur-md transition-colors"
+              className="mt-3 px-5 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-bold backdrop-blur-md transition-all active:scale-95 cursor-pointer"
             >
               Click to Stop & Generate Vocal Signature
             </button>
@@ -176,7 +176,7 @@ export default function AcousticPanicHook() {
             <div className="text-sm font-bold text-slate-800">
               {showAnalysis ? 'Acoustic Signature Analyzed' : 'Tap Microphone to Speak / Record Voice Note'}
             </div>
-            <p className="text-xs text-slate-500 max-w-xs mx-auto">
+            <p className="text-xs text-purple-900/70 max-w-xs mx-auto">
               {showAnalysis 
                 ? 'Biometric features mapped from audio stream below.' 
                 : 'Supports any dialect. Our AI will analyze emotional tremor & panic markers.'}
@@ -186,18 +186,18 @@ export default function AcousticPanicHook() {
 
       </div>
 
-      {/* The Highlight Wow: Vocal Stress Signature Card */}
+      {/* The Highlight Wow: Vocal Stress Signature Card with Lavender Clay */}
       {(showAnalysis || simulationState === SIMULATION_STATES.CRITICAL_VOICE) && (
-        <div className={`p-4 sm:p-5 rounded-2xl border transition-all duration-300 space-y-4 ${
+        <div className={`p-5 rounded-3xl border transition-all duration-300 space-y-4 ${
           isCritical
-            ? 'bg-purple-950/90 border-purple-500/50 text-white shadow-lg ring-1 ring-purple-400/30'
-            : 'bg-indigo-50/70 border-indigo-200 text-slate-800'
+            ? 'bg-linear-to-br from-[#291350] to-[#180a32] border-purple-500/50 text-white shadow-xl ring-1 ring-purple-400/40'
+            : 'bg-linear-to-br from-[#faf8ff] to-[#f1ecfe] border-purple-200 text-slate-800 shadow-md'
         }`}>
           
           {/* Card Top Title */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className={`p-1.5 rounded-lg ${isCritical ? 'bg-purple-800 text-purple-200' : 'bg-indigo-600 text-white'}`}>
+            <div className="flex items-center gap-2.5">
+              <div className={`p-2 rounded-xl ${isCritical ? 'bg-purple-800 text-purple-200' : 'bg-[#6342eb] text-white'}`}>
                 <FileAudio className="w-4 h-4" />
               </div>
               <div>
@@ -207,48 +207,48 @@ export default function AcousticPanicHook() {
               </div>
             </div>
 
-            <div className={`text-xs font-bold font-mono px-2.5 py-1 rounded-full ${
-              isCritical ? 'bg-rose-500/30 text-rose-300 border border-rose-400/40 animate-pulse' : 'bg-emerald-50 text-emerald-700'
+            <div className={`text-xs font-bold font-mono px-3 py-1 rounded-full ${
+              isCritical ? 'bg-rose-500/30 text-rose-300 border border-rose-400/40 animate-pulse' : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
             }`}>
               {isCritical ? '🚨 CRITICAL STRESS' : '✅ STABLE SIGNATURE'}
             </div>
           </div>
 
-          {/* 4 Quantitative Vocal Metrics Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          {/* 4 Quantitative Vocal Metrics Clay Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             
             {/* Metric 1: Voice Jitter */}
-            <div className={`p-3 rounded-xl border text-center ${
-              isCritical ? 'bg-slate-900/80 border-slate-700' : 'bg-white border-slate-200'
+            <div className={`p-3.5 rounded-2xl border text-center transition-all ${
+              isCritical ? 'bg-black/40 border-purple-700/50' : 'bg-white border-purple-200/80 shadow-2xs'
             }`}>
-              <div className={`text-[10px] font-medium ${isCritical ? 'text-slate-400' : 'text-slate-500'}`}>Voice Jitter</div>
-              <div className={`text-sm sm:text-base font-bold font-mono mt-0.5 ${isCritical ? 'text-rose-400' : 'text-slate-800'}`}>
+              <div className={`text-[10px] font-medium ${isCritical ? 'text-purple-300' : 'text-slate-500'}`}>Voice Jitter</div>
+              <div className={`text-sm sm:text-base font-extrabold font-mono mt-0.5 ${isCritical ? 'text-rose-400' : 'text-slate-800'}`}>
                 {isCritical ? '4.8% - 8.7%' : '0.42%'}
               </div>
-              <div className={`text-[9px] font-semibold mt-0.5 ${isCritical ? 'text-rose-400' : 'text-emerald-600'}`}>
+              <div className={`text-[9px] font-bold mt-0.5 ${isCritical ? 'text-rose-400' : 'text-emerald-600'}`}>
                 {isCritical ? 'High Tension' : 'Normal'}
               </div>
             </div>
 
             {/* Metric 2: Voice Shimmer */}
-            <div className={`p-3 rounded-xl border text-center ${
-              isCritical ? 'bg-slate-900/80 border-slate-700' : 'bg-white border-slate-200'
+            <div className={`p-3.5 rounded-2xl border text-center transition-all ${
+              isCritical ? 'bg-black/40 border-purple-700/50' : 'bg-white border-purple-200/80 shadow-2xs'
             }`}>
-              <div className={`text-[10px] font-medium ${isCritical ? 'text-slate-400' : 'text-slate-500'}`}>Voice Shimmer</div>
-              <div className={`text-sm sm:text-base font-bold font-mono mt-0.5 ${isCritical ? 'text-amber-400' : 'text-slate-800'}`}>
+              <div className={`text-[10px] font-medium ${isCritical ? 'text-purple-300' : 'text-slate-500'}`}>Voice Shimmer</div>
+              <div className={`text-sm sm:text-base font-extrabold font-mono mt-0.5 ${isCritical ? 'text-amber-400' : 'text-slate-800'}`}>
                 {isCritical ? '9.2% - 15.4%' : '1.18%'}
               </div>
-              <div className={`text-[9px] font-semibold mt-0.5 ${isCritical ? 'text-amber-400' : 'text-emerald-600'}`}>
+              <div className={`text-[9px] font-bold mt-0.5 ${isCritical ? 'text-amber-400' : 'text-emerald-600'}`}>
                 {isCritical ? 'Physiological Tremor' : 'Stable Amp'}
               </div>
             </div>
 
             {/* Metric 3: Dominant Emotion */}
-            <div className={`p-3 rounded-xl border text-center ${
-              isCritical ? 'bg-slate-900/80 border-slate-700' : 'bg-white border-slate-200'
+            <div className={`p-3.5 rounded-2xl border text-center transition-all ${
+              isCritical ? 'bg-black/40 border-purple-700/50' : 'bg-white border-purple-200/80 shadow-2xs'
             }`}>
-              <div className={`text-[10px] font-medium ${isCritical ? 'text-slate-400' : 'text-slate-500'}`}>Dominant Emotion</div>
-              <div className={`text-xs sm:text-sm font-bold mt-0.5 ${isCritical ? 'text-purple-300' : 'text-slate-800'}`}>
+              <div className={`text-[10px] font-medium ${isCritical ? 'text-purple-300' : 'text-slate-500'}`}>Dominant Emotion</div>
+              <div className={`text-xs sm:text-sm font-extrabold mt-0.5 ${isCritical ? 'text-purple-300' : 'text-slate-800'}`}>
                 {isCritical ? 'Acute Panic / Grief' : 'Calm / Composed'}
               </div>
               <div className={`text-[9px] font-mono mt-0.5 ${isCritical ? 'text-purple-400' : 'text-slate-400'}`}>
@@ -257,14 +257,14 @@ export default function AcousticPanicHook() {
             </div>
 
             {/* Metric 4: Vocal Tract Stress Score */}
-            <div className={`p-3 rounded-xl border text-center ${
-              isCritical ? 'bg-slate-900/80 border-slate-700' : 'bg-white border-slate-200'
+            <div className={`p-3.5 rounded-2xl border text-center transition-all ${
+              isCritical ? 'bg-black/40 border-purple-700/50' : 'bg-white border-purple-200/80 shadow-2xs'
             }`}>
-              <div className={`text-[10px] font-medium ${isCritical ? 'text-slate-400' : 'text-slate-500'}`}>Stress Score</div>
-              <div className={`text-sm sm:text-base font-bold font-mono mt-0.5 ${isCritical ? 'text-rose-400' : 'text-emerald-600'}`}>
+              <div className={`text-[10px] font-medium ${isCritical ? 'text-purple-300' : 'text-slate-500'}`}>Stress Score</div>
+              <div className={`text-sm sm:text-base font-extrabold font-mono mt-0.5 ${isCritical ? 'text-rose-400' : 'text-emerald-600'}`}>
                 {isCritical ? '84 - 94/100' : '18/100'}
               </div>
-              <div className={`text-[9px] font-semibold mt-0.5 ${isCritical ? 'text-rose-400' : 'text-emerald-600'}`}>
+              <div className={`text-[9px] font-bold mt-0.5 ${isCritical ? 'text-rose-400' : 'text-emerald-600'}`}>
                 {isCritical ? 'Intervention Alert' : 'Healthy Range'}
               </div>
             </div>
@@ -273,18 +273,18 @@ export default function AcousticPanicHook() {
 
           {/* Action Trigger Banner */}
           {isCritical && (
-            <div className="p-3 rounded-xl bg-purple-900/80 border border-purple-500/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="p-3.5 rounded-2xl bg-purple-900/90 border border-purple-400/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
                 <span>
                   Automatic Dispatch: <strong>Special Atrocities Cell & Dr. Anita Sharma</strong> notified with vocal spectrogram.
                 </span>
               </div>
               <button 
                 onClick={() => alert("Connecting to National Helpline 14566 / Tele-Counselor...")}
-                className="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold transition-colors shrink-0 flex items-center gap-1.5 shadow-xs cursor-pointer"
+                className="clay-btn clay-btn-danger px-4 py-2 text-white font-bold transition-all shrink-0 flex items-center gap-1.5 shadow-sm cursor-pointer active:scale-95"
               >
-                <PhoneCall className="w-3.5 h-3.5 text-white animate-bounce" />
+                <PhoneCall className="w-4 h-4 text-white animate-bounce" />
                 <span>Connect Helpline (14566)</span>
               </button>
             </div>
