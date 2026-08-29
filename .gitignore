@@ -1,10 +1,13 @@
 .venv/
 .env
-# Ignore Python compiled bytecode files inside the migrations folder
+# Ignore Python compiled bytecode files
 backend/app/migrations/__pycache__/
 backend/app/migrations/versions/__pycache__/
 backend/app/core/__pycache__/
 backend/app/db/__pycache__/
+backend/app/__pycache__/
+backend/app/api/__pycache__/
+backend/__pycache__/
 
 # Frontend
 docs/SIH_JURY_PRESENTATION_WALKTHROUGH.md
