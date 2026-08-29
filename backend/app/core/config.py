@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "Sahyog API"
+    PROJECT_NAME: str = "Samvedna AI"
     API_V1_STR: str = "/api/v1"
     
     # Generate a secure key by running `openssl rand -hex 32` in your terminal

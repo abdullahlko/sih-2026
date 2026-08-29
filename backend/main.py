@@ -2,14 +2,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from backend.app.db.session import get_async_session
+from app.core.config import settings
+from app.api.routes import router
 
 @asynccontextmanager
 async def lifespan(app : FastAPI):
-    print("Initializing database and tables...")
     yield
 
-app = FastAPI(title="My FastAPI App", lifespan=lifespan)
+app = FastAPI(title=settings.PROJECT_NAME, lifespan=lifespan)
+
+app.include_router(router, prefix=settings.API_V1_STR)
 
 @app.get("/health")
 def health_check():

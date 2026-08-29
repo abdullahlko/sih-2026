@@ -27,7 +27,7 @@ async def get_current_user(db: AsyncSession = Depends(get_async_session), token:
         raise credentials_exception
         
     # Asynchronous SQLAlchemy 2.0 query style
-    stmt = select(User).where(User.id == int(user_id))
+    stmt = select(User).where(User.id == user_id)
     result = await db.execute(stmt)
     user = result.scalars().first()
     
