@@ -6,7 +6,7 @@ import DpdpModal from './components/layout/DpdpModal';
 import CitizenPortal from './components/citizen/CitizenPortal';
 import CounselorWorkspace from './components/counselor/CounselorWorkspace';
 import AdminCommandCenter from './components/admin/AdminCommandCenter';
-import { AlertOctagon, PhoneCall, ShieldAlert, ArrowRight, ShieldCheck } from 'lucide-react';
+import { AlertOctagon, PhoneCall, ShieldAlert, ArrowRight, ShieldCheck, Sparkles, Heart } from 'lucide-react';
 
 function MainAppShell() {
   const { 
@@ -20,41 +20,55 @@ function MainAppShell() {
   const isCritical = simulationState !== SIMULATION_STATES.SAFE;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50/70 bg-[radial-gradient(#e0e7ff_1.2px,transparent_1.2px)] bg-size-[24px_24px] text-slate-800 antialiased">
+    <div className="min-h-screen flex flex-col relative overflow-hidden bg-[#f7f5ff] text-[#241c40] antialiased selection:bg-purple-500 selection:text-white">
       
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        {/* Top Left Floating Lavender Orb */}
+        <div className="absolute -top-24 -left-24 w-120 h-120 rounded-full bg-linear-to-br from-purple-300/40 via-indigo-300/30 to-purple-400/20 blur-[90px] animate-float-slow" />
+        
+        {/* Top Right Floating Violet Glow Orb */}
+        <div className="absolute top-1/4 -right-32 w-140 h-140 rounded-full bg-linear-to-br from-indigo-300/35 via-violet-300/30 to-pink-200/25 blur-[100px] animate-pulse-glow" />
+        
+        {/* Center-Bottom Floating Soft Lavender Bulb */}
+        <div className="absolute -bottom-32 left-1/3 w-160 h-160 rounded-full bg-linear-to-tr from-purple-200/45 via-indigo-200/30 to-violet-300/25 blur-[110px] animate-float-reverse" />
+
+        {/* Ambient Subtle Polka Dot Matrix */}
+        <div className="absolute inset-0 bg-[radial-gradient(#8c65ff_1px,transparent_1px)] bg-size-[28px_28px] opacity-[0.14]" />
+      </div>
+
       {/* 1. Master Navigation Bar */}
       <Navbar />
 
       {/* 2. Emergency Global Distress Broadcast Banner (Visible during CRITICAL_TEXT or CRITICAL_VOICE states) */}
       {isCritical && (
         <div 
-          className={`w-full py-2.5 px-4 sm:px-6 lg:px-8 text-white transition-all duration-300 ${
+          className={`w-full relative z-30 py-2.5 px-4 sm:px-6 lg:px-8 text-white transition-all duration-300 shadow-lg ${
             simulationState === SIMULATION_STATES.CRITICAL_TEXT
-              ? 'bg-linear-to-r from-rose-700 via-rose-600 to-rose-700 shadow-md animate-pulse'
-              : 'bg-linear-to-r from-purple-800 via-purple-700 to-purple-800 shadow-md animate-pulse'
+              ? 'bg-linear-to-r from-rose-600 via-rose-500 to-rose-600 animate-emergency-glow'
+              : 'bg-linear-to-r from-purple-800 via-indigo-700 to-purple-800 animate-emergency-glow'
           }`}
         >
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-semibold">
-            <div className="flex items-center gap-2">
-              <span className="p-1 rounded bg-white/20">
-                <AlertOctagon className="w-4 h-4 text-white" />
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs font-semibold">
+            <div className="flex items-center gap-2.5">
+              <span className="p-1.5 rounded-xl bg-white/20 shadow-inner">
+                <AlertOctagon className="w-4 h-4 text-white animate-bounce" />
               </span>
               <span>
-                <strong>CRITICAL DISTRESS TRIGGER FLAGGED:</strong> {statePayload.severityLabel} in {statePayload.firNumber} ({statePayload.activeVictimName})
+                <strong className="tracking-wide">CRITICAL DISTRESS TRIGGER FLAGGED:</strong> {statePayload.severityLabel} in {statePayload.firNumber} ({statePayload.activeVictimName})
               </span>
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="font-mono text-white/90 text-[11px] hidden md:inline">
-                Distress Score: <strong>{statePayload.distressScore}%</strong> | Jitter: <strong>{statePayload.voiceJitter}</strong>
+              <span className="font-mono text-white/90 text-[11px] hidden md:inline px-2.5 py-0.5 rounded-full bg-black/20">
+                Distress: <strong>{statePayload.distressScore}%</strong> | Jitter: <strong>{statePayload.voiceJitter}</strong>
               </span>
               {currentView !== VIEWS.COUNSELOR && (
                 <button
                   onClick={() => setCurrentView(VIEWS.COUNSELOR)}
-                  className="px-3 py-1 rounded-lg bg-white text-slate-900 text-xs font-bold hover:bg-slate-100 transition-colors shadow-2xs flex items-center gap-1 cursor-pointer"
+                  className="px-3.5 py-1 rounded-xl bg-white text-purple-950 text-xs font-bold hover:bg-purple-50 transition-all shadow-md active:scale-95 flex items-center gap-1.5 cursor-pointer"
                 >
                   <span>Open Triage Desk</span>
-                  <ArrowRight className="w-3 h-3" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>
@@ -63,21 +77,24 @@ function MainAppShell() {
       )}
 
       {/* 3. Main Viewport Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-7 pb-28 relative z-10">
         {currentView === VIEWS.CITIZEN && <CitizenPortal />}
         {currentView === VIEWS.COUNSELOR && <CounselorWorkspace />}
         {currentView === VIEWS.ADMIN && <AdminCommandCenter />}
       </main>
 
       {/* 4. Footer with MoSJE Institutional Footer & DPDP Modal Trigger */}
-      <footer className="mt-auto border-t border-indigo-100 bg-white/80 backdrop-blur-xs py-4 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-slate-600">
-            <img src="/favicon.png" alt="Samvedna AI" className="w-5 h-5 object-contain rounded" />
-            <span className="font-bold text-slate-800">Samvedna AI</span>
+      <footer className="mt-auto border-t border-purple-200/80 bg-white/75 backdrop-blur-md py-5 text-center text-xs text-purple-900/70 relative z-20">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5 text-purple-950 font-bold">
+            <div className="w-6 h-6 rounded-lg bg-linear-to-tr from-purple-600 to-indigo-600 p-0.5 shadow-sm">
+              <img src="/favicon.png" alt="Samvedna AI" className="w-full h-full object-contain rounded-md" />
+            </div>
+            <span className="font-heading font-extrabold tracking-tight">Samvedna AI</span>
           </div>
-          <div className="text-[11px] text-slate-400">
-            Ministry of Social Justice and Empowerment, Government of India • SC/ST Protection Division
+          
+          <div className="text-[11px] text-purple-800/70 font-medium">
+            Ministry of Social Justice and Empowerment (MoSJE), Govt. of India • SC/ST Protection & Trauma Relief System
           </div>
         </div>
       </footer>

@@ -84,36 +84,36 @@ export default function CaseQueueSidebar({ selectedCaseId, onSelectCase }) {
   const { simulationState, statePayload } = useSimulation();
 
   return (
-    <div className="flex flex-col h-185 rounded-3xl bg-white border border-indigo-100 shadow-md overflow-hidden">
+    <div className="clay-card flex flex-col h-190 overflow-hidden">
       
-      {/* Sidebar Header */}
-      <div className="p-4 bg-linear-to-r from-slate-900 via-indigo-950 to-slate-900 text-white border-b border-indigo-900/40">
+      {/* Sidebar Header with Lavender Gradient */}
+      <div className="p-5 bg-linear-to-r from-[#391d8e] via-[#4f2bd6] to-[#6342eb] text-white border-b border-white/20">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <ShieldAlert className="w-4 h-4 text-indigo-400" />
+            <ShieldAlert className="w-4 h-4 text-purple-300" />
             <h2 className="text-sm font-bold font-heading">Real-Time Triage Queue</h2>
           </div>
-          <span className="text-[10px] font-mono font-bold bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded border border-indigo-500/30">
+          <span className="text-[10px] font-mono font-bold bg-white/20 text-purple-100 px-2.5 py-0.5 rounded-full border border-white/25">
             5 Active Patients
           </span>
         </div>
-        <p className="text-[11px] text-slate-400 mt-1">
+        <p className="text-[11px] text-purple-200 mt-1">
           Prioritized by AI Dynamic Distress Score (DDS)
         </p>
 
         {/* Quick Search */}
-        <div className="mt-3 relative">
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+        <div className="mt-3.5 relative">
+          <Search className="w-3.5 h-3.5 text-purple-300 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search FIR, Victim, or Section..."
-            className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full pl-9 pr-3 py-2 rounded-2xl bg-black/25 border border-white/20 text-xs text-white placeholder:text-purple-300/80 focus:outline-none focus:ring-2 focus:ring-white/40"
           />
         </div>
       </div>
 
       {/* Case List Stream */}
-      <div className="flex-1 overflow-y-auto p-3 space-y-2.5 bg-slate-50/50">
+      <div className="flex-1 overflow-y-auto p-3.5 space-y-3 bg-linear-to-b from-[#faf8ff] to-[#f4efff]">
         {MOCK_CASES.map((item) => {
           // Dynamic score binding for active simulation case
           const isSelected = selectedCaseId === item.id;
@@ -134,20 +134,20 @@ export default function CaseQueueSidebar({ selectedCaseId, onSelectCase }) {
             <div
               key={item.id}
               onClick={() => onSelectCase(item.id)}
-              className={`p-3.5 rounded-2xl border transition-all duration-200 cursor-pointer relative ${
+              className={`p-4 rounded-2xl border transition-all duration-200 cursor-pointer relative ${
                 isSelected
-                  ? 'bg-indigo-50/80 border-indigo-300 shadow-sm ring-1 ring-indigo-200'
-                  : 'bg-white border-slate-200/80 hover:border-indigo-200 hover:shadow-2xs'
+                  ? 'bg-white border-[#704fe6] shadow-md shadow-purple-500/15 ring-2 ring-[#704fe6]/30 scale-[1.01]'
+                  : 'bg-white/85 border-purple-100 hover:border-purple-300 hover:bg-white hover:shadow-2xs'
               } ${
                 isHighDistress
-                  ? 'ring-1 ring-rose-300/80 border-rose-300/80'
+                  ? 'ring-1 ring-rose-400 border-rose-300'
                   : ''
               }`}
             >
               {/* Pulsing beacon if score > 75 */}
               {isHighDistress && (
-                <span className="absolute top-3 right-3 flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="absolute top-3.5 right-3.5 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-80"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
                 </span>
               )}
@@ -158,44 +158,44 @@ export default function CaseQueueSidebar({ selectedCaseId, onSelectCase }) {
                     <span className="text-xs font-bold text-slate-900 font-heading">
                       {item.name}
                     </span>
-                    <span className="text-[10px] font-mono text-slate-500">
+                    <span className="text-[10px] font-mono text-purple-900/60 font-medium">
                       ({item.category})
                     </span>
                   </div>
 
-                  <div className="text-[11px] font-mono text-indigo-600 font-medium">
+                  <div className="text-[11px] font-mono text-[#5932ea] font-bold">
                     {item.fir}
                   </div>
                 </div>
 
-                {/* Distress Badge */}
-                <div className={`px-2 py-1 rounded-xl text-center font-mono font-bold text-xs shrink-0 ${
+                {/* Distress Badge with Clay Styling */}
+                <div className={`px-2.5 py-1 rounded-xl text-center font-mono font-bold text-xs shrink-0 shadow-2xs ${
                   isHighDistress 
                     ? 'bg-rose-100 text-rose-700 border border-rose-200 animate-pulse' 
                     : isModerate
                       ? 'bg-amber-100 text-amber-800 border border-amber-200'
                       : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
                 }`}>
-                  <div className="text-[9px] uppercase font-sans font-medium text-slate-500">DDS</div>
+                  <div className="text-[9px] uppercase font-sans font-semibold text-slate-500">DDS</div>
                   <div>{currentDistress}%</div>
                 </div>
               </div>
 
               {/* Sub details */}
-              <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500">
-                <span className="truncate max-w-37.5 font-medium text-slate-600">
+              <div className="mt-3 pt-2.5 border-t border-purple-100 flex items-center justify-between text-[10px] text-purple-900/70">
+                <span className="truncate max-w-40 font-medium">
                   {item.section}
                 </span>
-                <span className="flex items-center gap-1 font-medium">
-                  <Clock className="w-3 h-3 text-slate-400" />
+                <span className="flex items-center gap-1 font-mono font-semibold text-purple-800">
+                  <Clock className="w-3 h-3 text-purple-400" />
                   {isSimulatedActiveCase ? statePayload.timeElapsed : item.lastUpdate}
                 </span>
               </div>
 
               {/* Alert Tag if high distress */}
               {isHighDistress && (
-                <div className="mt-2 text-[10px] font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-100 flex items-center gap-1">
-                  <AlertCircle className="w-3 h-3 text-rose-500 shrink-0" />
+                <div className="mt-2.5 text-[10px] font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-xl border border-rose-100 flex items-center gap-1.5 shadow-2xs">
+                  <AlertCircle className="w-3.5 h-3.5 text-rose-500 shrink-0" />
                   <span className="truncate">{item.alertType}</span>
                 </div>
               )}

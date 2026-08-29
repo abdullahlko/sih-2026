@@ -14,7 +14,8 @@ import {
   PhoneCall,
   Calendar,
   AlertCircle,
-  Building2
+  Building2,
+  Sparkles
 } from 'lucide-react';
 
 export default function CounselorWorkspace() {
@@ -36,31 +37,33 @@ export default function CounselorWorkspace() {
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       
-      {/* Top Clinical Header Banner */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-6 rounded-3xl bg-white border border-indigo-100 shadow-sm">
+      {/* Top Clinical Header Banner with Claymorphism */}
+      <div className="clay-card p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shadow-md shadow-indigo-200 shrink-0">
-            <Stethoscope className="w-6 h-6" />
+          <div className="clay-icon w-13 h-13 bg-linear-to-tr from-[#6342eb] to-[#7d54f5] text-white flex items-center justify-center shadow-md shadow-purple-500/20 shrink-0">
+            <Stethoscope className="w-7 h-7" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-heading font-bold text-slate-900">
+              <h1 className="text-xl font-heading font-extrabold text-slate-900">
                 Psychological Triage & Clinical Intervention Workspace
               </h1>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Assigned Officer: <strong className="text-slate-800">{statePayload.counselorAssigned}</strong> • Special Court Witness Support Cell
+            <p className="text-xs text-purple-900/70 mt-0.5">
+              Assigned Officer: <strong className="text-slate-900">{statePayload.counselorAssigned}</strong> • Special Court Witness Support Cell
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="px-4 py-2 rounded-2xl bg-slate-50 border border-slate-200 text-right">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">District Focus</div>
-            <div className="text-xs font-bold text-slate-800">Alwar & Mewat Region</div>
+          <div className="px-4 py-2 rounded-2xl bg-[#faf8ff] border border-purple-200/80 text-right shadow-2xs">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-purple-400 font-mono">District Focus</div>
+            <div className="text-xs font-bold text-slate-900">Alwar & Mewat Region</div>
           </div>
-          <div className={`px-4 py-2 rounded-2xl border text-right font-mono ${
-            isCritical ? 'bg-rose-50 border-rose-300 text-rose-800 animate-pulse' : 'bg-emerald-50 border-emerald-300 text-emerald-800'
+          <div className={`px-4 py-2 rounded-2xl border text-right font-mono shadow-2xs ${
+            isCritical 
+              ? 'bg-rose-50 border-rose-300 text-rose-800 animate-pulse' 
+              : 'bg-emerald-50 border-emerald-300 text-emerald-800'
           }`}>
             <div className="text-[10px] font-sans font-bold uppercase tracking-wider">
               {isCritical ? 'Active SOS Priority' : 'Triage Queue'}
@@ -87,18 +90,18 @@ export default function CounselorWorkspace() {
         <div className="lg:col-span-8 space-y-6">
           
           {/* Active Patient Identity Card */}
-          <div className="p-5 sm:p-6 rounded-3xl bg-white border border-indigo-100 shadow-sm space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div className="clay-card p-5 sm:p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-purple-100">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">
+                  <span className="text-xs font-mono font-bold text-[#5932ea] bg-purple-100/80 px-2.5 py-0.5 rounded-full border border-purple-200">
                     {selectedCase.fir}
                   </span>
-                  <span className="text-xs font-semibold text-slate-500">
+                  <span className="text-xs font-semibold text-purple-900/70">
                     {selectedCase.section}
                   </span>
                 </div>
-                <h2 className="text-lg sm:text-xl font-heading font-extrabold text-slate-900 mt-1 flex items-center gap-2">
+                <h2 className="text-lg sm:text-xl font-heading font-extrabold text-slate-900 mt-1.5 flex items-center gap-2">
                   {selectedCase.name}
                   <span className="text-xs font-medium text-slate-500 font-sans">
                     ({selectedCase.category})
@@ -107,8 +110,8 @@ export default function CounselorWorkspace() {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-500 flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-indigo-600" />
+                <span className="text-xs text-purple-900/80 font-medium flex items-center gap-1.5 bg-[#faf8ff] px-3 py-1 rounded-full border border-purple-200/80">
+                  <MapPin className="w-3.5 h-3.5 text-[#6342eb]" />
                   {selectedCase.district}
                 </span>
               </div>
@@ -116,17 +119,17 @@ export default function CounselorWorkspace() {
 
             {/* Sub Meta Info */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80">
-                <span className="text-[10px] text-slate-400 block font-medium">Trial Stage</span>
-                <span className="font-bold text-slate-800">{selectedCase.stage}</span>
+              <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 shadow-2xs">
+                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">Trial Stage</span>
+                <span className="font-bold text-slate-900 mt-0.5 block">{selectedCase.stage}</span>
               </div>
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80">
-                <span className="text-[10px] text-slate-400 block font-medium">Assigned DLSA Advocate</span>
-                <span className="font-bold text-slate-800">Adv. R. K. Meena</span>
+              <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 shadow-2xs">
+                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">Assigned DLSA Advocate</span>
+                <span className="font-bold text-slate-900 mt-0.5 block">Adv. R. K. Meena</span>
               </div>
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 col-span-2 sm:col-span-1">
-                <span className="text-[10px] text-slate-400 block font-medium">Rehabilitation Status</span>
-                <span className="font-bold text-emerald-700">₹1.25L Disbursed</span>
+              <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 shadow-2xs col-span-2 sm:col-span-1">
+                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">Rehabilitation Status</span>
+                <span className="font-bold text-emerald-700 mt-0.5 block">₹1.25L Disbursed</span>
               </div>
             </div>
           </div>

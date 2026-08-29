@@ -20,11 +20,9 @@ export default function DistressGauge({ victimData }) {
   const isModerate = score >= 40 && score < 75;
 
   // Calculate needle angle (-90deg to +90deg for semi-circle)
-  // 0% -> -90deg, 100% -> +90deg
   const needleAngle = -90 + (score / 100) * 180;
 
   // Dynamic 14-Day Longitudinal Trend Points
-  // Baseline adjustments based on current simulation state
   const trendPoints = isCritical
     ? [
         { day: 'D-14', score: 22, note: 'Baseline' },
@@ -65,22 +63,25 @@ export default function DistressGauge({ victimData }) {
   const areaD = `${pathD} L ${points[points.length - 1].x} ${chartHeight} L ${points[0].x} ${chartHeight} Z`;
 
   return (
-    <div className="rounded-3xl bg-white border border-indigo-100 shadow-md p-6 space-y-6">
+    <div className="clay-card p-6 sm:p-7 space-y-6">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-purple-100">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
+            <div className="clay-icon w-9 h-9 bg-linear-to-tr from-[#6342eb] to-[#7d54f5] flex items-center justify-center text-white">
+              <HeartPulse className="w-5 h-5" />
+            </div>
             <h3 className="text-base font-bold font-heading text-slate-900">
               The "Nyaya-XAI" Dynamic Distress Gauge
             </h3>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Composite psychological distress calculated continuously from speech tremors, semantic threats, and court milestones.
+          <p className="text-xs text-purple-900/70 mt-1">
+            Composite psychological distress calculated continuously from speech tremors, semantic threats and court milestones.
           </p>
         </div>
 
-        <div className={`px-3 py-1.5 rounded-xl text-xs font-bold font-mono self-start sm:self-auto flex items-center gap-1.5 ${
+        <div className={`px-3.5 py-1.5 rounded-full text-xs font-bold font-mono self-start sm:self-auto flex items-center gap-2 shadow-2xs ${
           isCritical 
             ? 'bg-rose-100 text-rose-800 border border-rose-200 animate-pulse' 
             : isModerate
@@ -97,37 +98,37 @@ export default function DistressGauge({ victimData }) {
         
         {/* Semi-Circular SVG Speedometer */}
         <div className="relative flex flex-col items-center justify-center">
-          <svg width="260" height="150" viewBox="0 0 260 150" className="overflow-visible">
+          <svg width="270" height="155" viewBox="0 0 270 155" className="overflow-visible">
             <defs>
               {/* Speedometer Gradient Arc */}
               <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#10b981" />
-                <stop offset="45%" stopColor="#f59e0b" />
-                <stop offset="80%" stopColor="#ef4444" />
-                <stop offset="100%" stopColor="#991b1b" />
+                <stop offset="40%" stopColor="#8c65ff" />
+                <stop offset="70%" stopColor="#f59e0b" />
+                <stop offset="100%" stopColor="#ef4444" />
               </linearGradient>
 
               {/* Needle drop shadow */}
               <filter id="needleShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#000000" floodOpacity="0.25" />
+                <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#431407" floodOpacity="0.3" />
               </filter>
             </defs>
 
             {/* Background Track Arc */}
             <path
-              d="M 30 130 A 100 100 0 0 1 230 130"
+              d="M 35 135 A 100 100 0 0 1 235 135"
               fill="none"
-              stroke="#e2e8f0"
-              strokeWidth="20"
+              stroke="#ece5fe"
+              strokeWidth="22"
               strokeLinecap="round"
             />
 
             {/* Value Colored Arc */}
             <path
-              d="M 30 130 A 100 100 0 0 1 230 130"
+              d="M 35 135 A 100 100 0 0 1 235 135"
               fill="none"
               stroke="url(#gaugeGradient)"
-              strokeWidth="20"
+              strokeWidth="22"
               strokeLinecap="round"
               strokeDasharray="314.15"
               strokeDashoffset={314.15 - (314.15 * score) / 100}
@@ -135,32 +136,32 @@ export default function DistressGauge({ victimData }) {
             />
 
             {/* Calibration tick labels */}
-            <text x="25" y="145" fill="#64748b" fontSize="10" fontWeight="bold" textAnchor="middle">0</text>
-            <text x="75" y="55" fill="#64748b" fontSize="10" fontWeight="bold" textAnchor="middle">25</text>
-            <text x="130" y="22" fill="#64748b" fontSize="10" fontWeight="bold" textAnchor="middle">50</text>
-            <text x="185" y="55" fill="#64748b" fontSize="10" fontWeight="bold" textAnchor="middle">75</text>
-            <text x="235" y="145" fill="#64748b" fontSize="10" fontWeight="bold" textAnchor="middle">100</text>
+            <text x="30" y="152" fill="#786699" fontSize="11" fontWeight="bold" textAnchor="middle">0</text>
+            <text x="80" y="60" fill="#786699" fontSize="11" fontWeight="bold" textAnchor="middle">25</text>
+            <text x="135" y="24" fill="#786699" fontSize="11" fontWeight="bold" textAnchor="middle">50</text>
+            <text x="190" y="60" fill="#786699" fontSize="11" fontWeight="bold" textAnchor="middle">75</text>
+            <text x="240" y="152" fill="#786699" fontSize="11" fontWeight="bold" textAnchor="middle">100</text>
 
             {/* Center Pivot Needle */}
-            <g transform={`translate(130, 130) rotate(${needleAngle})`} className="transition-transform duration-700 ease-out">
+            <g transform={`translate(135, 135) rotate(${needleAngle})`} className="transition-transform duration-700 ease-out">
               {/* Needle Shape */}
               <polygon
-                points="-4,0 0,-95 4,0"
-                fill="#1e1b4b"
+                points="-5,0 0,-100 5,0"
+                fill="#2e1065"
                 filter="url(#needleShadow)"
               />
-              <circle cx="0" cy="0" r="10" fill="#312e81" />
+              <circle cx="0" cy="0" r="11" fill="#4c1d95" />
               <circle cx="0" cy="0" r="4" fill="#ffffff" />
             </g>
           </svg>
 
           {/* Numerical Score Underneath */}
-          <div className="text-center -mt-3">
-            <div className="text-3xl font-heading font-extrabold text-slate-900 tracking-tight font-mono">
+          <div className="text-center -mt-2">
+            <div className="text-3xl font-heading font-black text-slate-900 tracking-tight font-mono">
               {score}
-              <span className="text-base text-slate-400 font-normal"> / 100</span>
+              <span className="text-base text-purple-400 font-normal"> / 100</span>
             </div>
-            <div className={`text-xs font-semibold ${
+            <div className={`text-xs font-bold mt-0.5 ${
               isCritical ? 'text-rose-600' : isModerate ? 'text-amber-600' : 'text-emerald-600'
             }`}>
               {isCritical ? 'Severe Distress Spike' : isModerate ? 'Moderate Strain' : 'Psychologically Stable'}
@@ -170,29 +171,29 @@ export default function DistressGauge({ victimData }) {
 
         {/* Biometric & Clinical Secondary Cards */}
         <div className="grid grid-cols-2 gap-3 w-full max-w-sm">
-          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
-            <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-500">
-              <Activity className="w-3.5 h-3.5 text-purple-500" />
+          <div className="p-4 rounded-2xl bg-[#faf8ff] border border-purple-100 shadow-2xs">
+            <div className="flex items-center gap-1.5 text-[11px] font-bold text-purple-400 uppercase font-mono">
+              <Activity className="w-3.5 h-3.5 text-[#704fe6]" />
               <span>Acoustic Tremor</span>
             </div>
-            <div className="text-lg font-bold font-mono text-slate-900 mt-1">
+            <div className="text-xl font-extrabold font-mono text-slate-900 mt-1">
               {isSimulatedVictim ? statePayload.voiceJitter : '0.42%'}
             </div>
-            <div className="text-[10px] text-slate-500 mt-0.5">
+            <div className="text-[10px] text-purple-900/60 mt-0.5 font-medium">
               {isCritical ? 'Severe vocal cord tension' : 'Stable voice prosody'}
             </div>
           </div>
 
-          <div className="col-span-2 p-3.5 rounded-2xl bg-indigo-50/70 border border-indigo-100 flex items-center justify-between text-xs">
+          <div className="col-span-2 p-4 rounded-2xl bg-linear-to-r from-purple-50 to-indigo-50 border border-purple-200 flex items-center justify-between text-xs shadow-2xs">
             <div>
-              <div className="font-bold text-indigo-950 font-heading">
+              <div className="font-bold text-purple-950 font-heading">
                 Trial Milestone Vulnerability
               </div>
-              <div className="text-[11px] text-indigo-800">
+              <div className="text-[11px] text-purple-800 font-medium">
                 {victimData?.stage || 'Witness Protection Period'}
               </div>
             </div>
-            <span className="font-mono font-bold text-[11px] px-2 py-0.5 rounded bg-indigo-200/70 text-indigo-900">
+            <span className="font-mono font-bold text-[11px] px-3 py-1 rounded-full bg-purple-200/80 text-purple-900 border border-purple-300">
               High Risk Stage
             </span>
           </div>
@@ -202,34 +203,34 @@ export default function DistressGauge({ victimData }) {
       </div>
 
       {/* 14-Day Longitudinal Distress Trend-Line */}
-      <div className="space-y-2 pt-2 border-t border-slate-100">
+      <div className="space-y-2.5 pt-3 border-t border-purple-100">
         <div className="flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2 font-bold text-slate-700 font-heading">
-            <Calendar className="w-4 h-4 text-indigo-600" />
+          <div className="flex items-center gap-2 font-bold text-slate-800 font-heading">
+            <Calendar className="w-4 h-4 text-[#6342eb]" />
             <span>14-Day Longitudinal Distress Trend-Line (Continuous Triage)</span>
           </div>
         </div>
 
-        {/* SVG Longitudinal Graph */}
-        <div className="relative rounded-2xl bg-slate-900 p-4 overflow-hidden border border-slate-800 shadow-inner">
+        {/* SVG Longitudinal Graph with Dark Lavender Glass */}
+        <div className="relative rounded-3xl bg-linear-to-br from-[#1b1436] to-[#120c26] p-4.5 overflow-hidden border border-purple-900/60 shadow-xl">
           <svg
             viewBox={`0 0 ${chartWidth} ${chartHeight}`}
             className="w-full h-24 overflow-visible"
           >
             <defs>
               <linearGradient id="trendAreaGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={isCritical ? '#ef4444' : '#6366f1'} stopOpacity="0.4" />
-                <stop offset="100%" stopColor={isCritical ? '#ef4444' : '#6366f1'} stopOpacity="0.0" />
+                <stop offset="0%" stopColor={isCritical ? '#f43f5e' : '#8c65ff'} stopOpacity="0.45" />
+                <stop offset="100%" stopColor={isCritical ? '#f43f5e' : '#8c65ff'} stopOpacity="0.0" />
               </linearGradient>
             </defs>
 
             {/* Horizontal Grid lines */}
-            <line x1="0" y1="25" x2={chartWidth} y2="25" stroke="#334155" strokeDasharray="3,3" />
-            <line x1="0" y1="55" x2={chartWidth} y2="55" stroke="#334155" strokeDasharray="3,3" />
-            <line x1="0" y1="85" x2={chartWidth} y2="85" stroke="#334155" strokeDasharray="3,3" />
+            <line x1="0" y1="25" x2={chartWidth} y2="25" stroke="#372f56" strokeDasharray="3,3" />
+            <line x1="0" y1="55" x2={chartWidth} y2="55" stroke="#372f56" strokeDasharray="3,3" />
+            <line x1="0" y1="85" x2={chartWidth} y2="85" stroke="#372f56" strokeDasharray="3,3" />
 
-            {/* Critical Threshold Line (at y=30 approx score 75) */}
-            <line x1="0" y1="35" x2={chartWidth} y2="35" stroke="#f43f5e" strokeWidth="1" strokeDasharray="4,4" opacity="0.6" />
+            {/* Critical Threshold Line */}
+            <line x1="0" y1="35" x2={chartWidth} y2="35" stroke="#f43f5e" strokeWidth="1" strokeDasharray="4,4" opacity="0.7" />
 
             {/* Area Fill */}
             <path d={areaD} fill="url(#trendAreaGradient)" className="transition-all duration-500" />
@@ -238,8 +239,8 @@ export default function DistressGauge({ victimData }) {
             <path
               d={pathD}
               fill="none"
-              stroke={isCritical ? '#f43f5e' : '#818cf8'}
-              strokeWidth="2.5"
+              stroke={isCritical ? '#f43f5e' : '#a78bfa'}
+              strokeWidth="3"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="transition-all duration-500"
@@ -251,17 +252,18 @@ export default function DistressGauge({ victimData }) {
                 <circle
                   cx={pt.x}
                   cy={pt.y}
-                  r="3.5"
+                  r="4"
                   fill={isCritical && idx === points.length - 1 ? '#ef4444' : '#ffffff'}
-                  stroke={isCritical ? '#f43f5e' : '#6366f1'}
-                  strokeWidth="2"
+                  stroke={isCritical ? '#f43f5e' : '#7c3aed'}
+                  strokeWidth="2.5"
                 />
                 <text
                   x={pt.x}
-                  y={chartHeight - 4}
-                  fill="#94a3b8"
+                  y={chartHeight - 3}
+                  fill="#a599c2"
                   fontSize="9"
                   fontFamily="monospace"
+                  fontWeight="bold"
                   textAnchor="middle"
                 >
                   {pt.day}
@@ -271,10 +273,10 @@ export default function DistressGauge({ victimData }) {
           </svg>
 
           {/* Trend Milestone Bar */}
-          <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-800 font-mono">
+          <div className="flex items-center justify-between text-[10px] text-purple-200/70 pt-2 border-t border-purple-900/60 font-mono">
             <span>D-14: FIR Baseline</span>
             <span>D-8: Accused Bail Hearing (Spike +24%)</span>
-            <span className={isCritical ? 'text-rose-400 font-bold' : 'text-emerald-400'}>
+            <span className={isCritical ? 'text-rose-400 font-bold' : 'text-emerald-400 font-bold'}>
               Today: {score}% ({isCritical ? 'Urgent Intervention Required' : 'Stabilized'})
             </span>
           </div>

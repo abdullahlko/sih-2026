@@ -32,7 +32,7 @@ export default function SwarajChatbot() {
   const chatContainerRef = useRef(null);
   const isInitialMount = useRef(true);
 
-  // Auto-scroll only inside the chat message container (never scrolling the page/window)
+  // Auto-scroll inside the chat message container
   const scrollToBottom = (behavior = 'smooth') => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTo({
@@ -45,7 +45,6 @@ export default function SwarajChatbot() {
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
-      // Instant positioning without affecting window scroll
       if (chatContainerRef.current) {
         chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
       }
@@ -179,16 +178,16 @@ export default function SwarajChatbot() {
   };
 
   return (
-    <div className="flex flex-col h-140 rounded-3xl bg-white border border-indigo-100 shadow-md overflow-hidden transition-all">
+    <div className="clay-card flex flex-col h-145 overflow-hidden transition-all">
       
-      {/* Chatbot Top Bar */}
-      <div className="px-5 py-3.5 bg-linear-to-r from-indigo-900 via-indigo-800 to-indigo-950 text-white flex items-center justify-between border-b border-indigo-700/50">
-        <div className="flex items-center gap-3">
+      {/* Chatbot Top Bar with Rich Lavender Gradient */}
+      <div className="px-5 py-4 bg-linear-to-r from-[#4f2bd6] via-[#6342eb] to-[#7d54f5] text-white flex items-center justify-between border-b border-white/20">
+        <div className="flex items-center gap-3.5">
           <div className="relative">
-            <div className="w-10 h-10 rounded-2xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-md shadow-indigo-900/30">
+            <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-inner border border-white/30">
               <Bot className="w-5 h-5" />
             </div>
-            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-indigo-900"></span>
+            <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-purple-900 shadow-xs"></span>
           </div>
 
           <div>
@@ -197,9 +196,9 @@ export default function SwarajChatbot() {
                 Swaraj-NLP Mental Health Companion
               </h2>
             </div>
-            <p className="text-[11px] text-indigo-200 flex items-center gap-1.5">
+            <p className="text-[11px] text-purple-200 flex items-center gap-1.5 font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              24x7 Multi-Lingual Distress Screening • Hinglish / Vernacular
+              24x7 Multi-Lingual Distress Screening
             </p>
           </div>
         </div>
@@ -207,7 +206,7 @@ export default function SwarajChatbot() {
         <div className="flex items-center gap-2">
           <button 
             onClick={() => setMessages([])}
-            className="p-1.5 rounded-lg text-indigo-200 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-2 rounded-xl text-purple-200 hover:text-white hover:bg-white/15 transition-all active:scale-95 cursor-pointer"
             title="Reset Chat Session"
           >
             <RefreshCw className="w-4 h-4" />
@@ -216,7 +215,7 @@ export default function SwarajChatbot() {
       </div>
 
       {/* Message Stream Area */}
-      <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 bg-slate-50/50">
+      <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 bg-linear-to-b from-[#faf8ff] to-[#f5f1ff]">
         
         {messages.map((msg) => {
           const isUser = msg.sender === 'user';
@@ -224,15 +223,15 @@ export default function SwarajChatbot() {
           return (
             <div 
               key={msg.id} 
-              className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} animate-in fade-in slide-in-from-bottom-2 duration-200`}
+              className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} animate-spring-pop`}
             >
               <div className={`flex items-start gap-2.5 max-w-[88%] sm:max-w-[80%] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
                 
-                {/* Avatar */}
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs font-bold shadow-xs ${
+                {/* Avatar with Claymorphic Badge */}
+                <div className={`w-8 h-8 rounded-2xl flex items-center justify-center shrink-0 text-xs font-bold shadow-sm ${
                   isUser 
-                    ? 'bg-indigo-600 text-white' 
-                    : 'bg-linear-to-tr from-purple-600 to-indigo-600 text-white'
+                    ? 'bg-[#6342eb] text-white' 
+                    : 'bg-linear-to-tr from-[#7d54f5] to-[#5932ea] text-white border border-purple-200'
                 }`}>
                   {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
                 </div>
@@ -240,22 +239,22 @@ export default function SwarajChatbot() {
                 {/* Bubble Container */}
                 <div className="space-y-1.5">
                   
-                  {/* The Bubble */}
-                  <div className={`px-4 py-3 text-xs sm:text-sm leading-relaxed shadow-xs ${
+                  {/* The Clay Bubble */}
+                  <div className={`px-4 py-3 text-xs sm:text-sm leading-relaxed transition-all ${
                     isUser
-                      ? 'rounded-2xl rounded-tr-none bg-indigo-600 text-white font-medium shadow-indigo-200'
-                      : 'rounded-2xl rounded-tl-none bg-violet-50 text-slate-800 border border-violet-100 font-normal shadow-violet-100/50'
+                      ? 'rounded-2xl rounded-tr-none bg-linear-to-br from-[#6342eb] to-[#502cd8] text-white font-medium shadow-md shadow-purple-500/20 border border-purple-400/30'
+                      : 'rounded-2xl rounded-tl-none bg-white text-slate-800 border border-purple-200/80 font-normal shadow-sm shadow-purple-500/10'
                   }`}>
                     
                     {/* Audio message presentation if applicable */}
                     {msg.isAudioMessage ? (
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2 p-2 rounded-xl bg-indigo-700/60 border border-indigo-400/40 text-white">
-                          <Volume2 className="w-4 h-4 text-purple-300 animate-pulse" />
+                      <div className="space-y-2.5">
+                        <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-purple-900/70 border border-purple-400/40 text-white">
+                          <Volume2 className="w-5 h-5 text-purple-300 animate-pulse" />
                           <span className="font-mono text-xs font-bold">Audio Note ({msg.duration})</span>
-                          <span className="text-[10px] text-indigo-200 ml-auto">Acoustic Stream</span>
+                          <span className="text-[10px] text-purple-200 ml-auto bg-purple-800/80 px-2 py-0.5 rounded-full">Acoustic Stream</span>
                         </div>
-                        <p className="italic text-xs text-indigo-100">{msg.transcript}</p>
+                        <p className="italic text-xs text-purple-100">{msg.transcript}</p>
                       </div>
                     ) : (
                       <p>{msg.text}</p>
@@ -263,20 +262,20 @@ export default function SwarajChatbot() {
 
                     {/* Threat Flag Banner for User Messages */}
                     {msg.isThreatFlagged && (
-                      <div className="mt-2.5 p-2 rounded-xl bg-amber-500/20 border border-amber-300/40 text-amber-100 text-xs space-y-1">
+                      <div className="mt-3 p-2.5 rounded-xl bg-amber-500/20 border border-amber-300/50 text-amber-100 text-xs space-y-1.5">
                         <div className="flex items-center gap-1.5 font-bold text-amber-200 text-[11px] animate-pulse">
-                          <AlertTriangle className="w-3.5 h-3.5 text-amber-300" />
+                          <AlertTriangle className="w-4 h-4 text-amber-300" />
                           <span>⚠️ Threat Intent Detected (Confidence 94.2%)</span>
                         </div>
-                        <div className="font-mono text-[11px] text-white/90 bg-indigo-900/50 p-1.5 rounded border border-indigo-700">
-                          <span className="text-indigo-300">[Swaraj-NLP Translation]:</span> "{msg.transliteration}"
+                        <div className="font-mono text-[11px] text-white/95 bg-purple-950/70 p-2 rounded-lg border border-purple-700">
+                          <span className="text-purple-300">[Swaraj-NLP Translation]:</span> "{msg.transliteration}"
                         </div>
                       </div>
                     )}
 
                     {/* Threat / Acoustic Analysis Card inside Audio Message */}
                     {msg.voiceAnalysis && (
-                      <div className="mt-2 p-2 rounded-xl bg-purple-900/60 border border-purple-400/40 text-xs font-mono text-purple-200">
+                      <div className="mt-2.5 p-2.5 rounded-xl bg-purple-950/70 border border-purple-400/40 text-xs font-mono text-purple-200 space-y-0.5">
                         <div>Vocal Jitter: <strong className="text-rose-300">{msg.voiceAnalysis.jitter}</strong></div>
                         <div>Tremor Shimmer: <strong className="text-amber-300">{msg.voiceAnalysis.shimmer}</strong></div>
                         <div>Distress Score: <strong className="text-rose-300">{msg.voiceAnalysis.stressScore}/100</strong></div>
@@ -285,13 +284,13 @@ export default function SwarajChatbot() {
 
                     {/* Action buttons inside bot response if alert triggered */}
                     {msg.actions && (
-                      <div className="mt-3 flex flex-wrap gap-2 pt-2 border-t border-violet-200/60">
+                      <div className="mt-3.5 flex flex-wrap gap-2 pt-2.5 border-t border-purple-200/60">
                         {msg.actions.map((act, i) => {
                           const IconComp = act.icon;
                           return (
                             <button
                               key={i}
-                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-700 transition-colors shadow-xs"
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#6342eb] text-white text-xs font-bold hover:bg-[#502cd8] transition-all shadow-xs cursor-pointer active:scale-95"
                             >
                               <IconComp className="w-3.5 h-3.5 text-amber-300" />
                               <span>{act.label}</span>
@@ -304,7 +303,7 @@ export default function SwarajChatbot() {
                   </div>
 
                   {/* Subtext and Timestamp */}
-                  <div className={`flex items-center gap-2 px-1 text-[10px] text-slate-400 ${isUser ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`flex items-center gap-2 px-1 text-[10px] text-purple-900/60 font-medium ${isUser ? 'justify-end' : 'justify-start'}`}>
                     <span>{msg.time}</span>
                     {msg.subText && (
                       <>
@@ -312,7 +311,7 @@ export default function SwarajChatbot() {
                         <span className="italic">{msg.subText}</span>
                       </>
                     )}
-                    {isUser && <CheckCheck className="w-3 h-3 text-indigo-600" />}
+                    {isUser && <CheckCheck className="w-3.5 h-3.5 text-[#6342eb]" />}
                   </div>
 
                 </div>
@@ -323,58 +322,58 @@ export default function SwarajChatbot() {
 
         {/* Typing Indicator */}
         {isTyping && (
-          <div className="flex items-start gap-2.5 animate-in fade-in duration-150">
-            <div className="w-8 h-8 rounded-full bg-linear-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center shrink-0">
+          <div className="flex items-start gap-2.5 animate-spring-pop">
+            <div className="w-8 h-8 rounded-2xl bg-linear-to-tr from-[#7d54f5] to-[#5932ea] text-white flex items-center justify-center shrink-0 shadow-xs">
               <Bot className="w-4 h-4" />
             </div>
-            <div className="px-4 py-3 rounded-2xl rounded-tl-none bg-violet-50 border border-violet-100 flex items-center gap-1.5 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce [animation-delay:0ms]"></span>
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce [animation-delay:150ms]"></span>
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-bounce [animation-delay:300ms]"></span>
-              <span className="text-xs text-slate-500 font-medium ml-1">Swaraj-NLP is analyzing context...</span>
+            <div className="px-4 py-3 rounded-2xl rounded-tl-none bg-white border border-purple-200/80 flex items-center gap-2 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#6342eb] animate-bounce [animation-delay:0ms]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#6342eb] animate-bounce [animation-delay:150ms]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#6342eb] animate-bounce [animation-delay:300ms]"></span>
+              <span className="text-xs text-purple-900/70 font-medium ml-1">Swaraj-NLP is analyzing context...</span>
             </div>
           </div>
         )}
       </div>
 
-      {/* Quick Reply Pills */}
-      <div className="px-4 py-2 bg-white border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 shrink-0">Quick:</span>
+      {/* Quick Reply Clay Pills */}
+      <div className="px-4 py-2.5 bg-white border-t border-purple-100 flex items-center gap-2 overflow-x-auto no-scrollbar">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400 shrink-0 font-mono">Quick:</span>
         {QUICK_REPLIES.map((pill) => (
           <button
             key={pill.id}
             onClick={() => handleSendMessage(pill.prompt)}
-            className="px-3 py-1 rounded-full bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200 border border-slate-200/80 text-xs font-medium text-slate-700 transition-colors shrink-0 shadow-2xs cursor-pointer"
+            className="px-3.5 py-1.5 rounded-full bg-[#f6f2fe] hover:bg-[#ede5fc] hover:text-[#5932ea] border border-purple-200/80 text-xs font-semibold text-purple-900 transition-all shrink-0 shadow-2xs hover:scale-102 active:scale-95 cursor-pointer"
           >
             {pill.label}
           </button>
         ))}
       </div>
 
-      {/* Input Composer */}
-      <div className="p-3 bg-white border-t border-slate-200">
+      {/* Input Composer with Clay Styling */}
+      <div className="p-3.5 bg-white border-t border-purple-200/80">
         <form 
           onSubmit={(e) => {
             e.preventDefault();
             handleSendMessage();
           }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2.5"
         >
           <input
             type="text"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder="Type in English, Hindi (हिंदी), or Hinglish..."
-            className="flex-1 px-4 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400"
+            className="clay-input flex-1 px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-purple-400 focus:outline-none"
           />
 
           <button
             type="submit"
             disabled={!inputText.trim()}
-            className={`p-2.5 rounded-2xl transition-all duration-200 shadow-sm ${
+            className={`p-3 rounded-2xl transition-all duration-200 shadow-md ${
               inputText.trim() 
-                ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-indigo-200 cursor-pointer' 
-                : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                ? 'clay-btn-primary cursor-pointer' 
+                : 'bg-purple-100 text-purple-400 cursor-not-allowed border border-purple-200'
             }`}
             title="Send Message"
           >
