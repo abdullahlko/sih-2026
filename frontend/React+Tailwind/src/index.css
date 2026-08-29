@@ -8,11 +8,19 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6, .font-heading {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-heading {
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   }
 
-  code, pre, .font-mono {
+  code,
+  pre,
+  .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
 }
@@ -23,7 +31,7 @@
   background: #ffffff;
   border-radius: 28px;
   border: 1px solid rgba(216, 207, 255, 0.7);
-  box-shadow: 
+  box-shadow:
     0 16px 32px -8px rgba(112, 79, 230, 0.12),
     0 4px 12px -2px rgba(99, 66, 235, 0.05),
     inset 2px 2px 5px rgba(255, 255, 255, 1),
@@ -32,7 +40,7 @@
 }
 
 .clay-card:hover {
-  box-shadow: 
+  box-shadow:
     0 22px 40px -10px rgba(112, 79, 230, 0.18),
     0 6px 16px -2px rgba(99, 66, 235, 0.08),
     inset 2px 2px 6px rgba(255, 255, 255, 1),
@@ -44,7 +52,7 @@
   background: linear-gradient(135deg, #faf8ff 0%, #f1ecfe 100%);
   border-radius: 28px;
   border: 1px solid rgba(197, 182, 255, 0.75);
-  box-shadow: 
+  box-shadow:
     0 14px 28px -6px rgba(112, 79, 230, 0.14),
     inset 2px 2px 5px rgba(255, 255, 255, 0.95),
     inset -2px -2px 6px rgba(120, 87, 255, 0.1);
@@ -56,7 +64,7 @@
   background: linear-gradient(135deg, #4f2bd6 0%, #6342eb 40%, #7d54f5 100%);
   border-radius: 32px;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 
+  box-shadow:
     0 24px 48px -12px rgba(99, 66, 235, 0.35),
     0 10px 20px -4px rgba(79, 43, 214, 0.2),
     inset 2px 2px 6px rgba(255, 255, 255, 0.4),
@@ -68,7 +76,7 @@
   background: linear-gradient(145deg, #18132e 0%, #110d24 100%);
   border-radius: 28px;
   border: 1px solid rgba(140, 101, 255, 0.25);
-  box-shadow: 
+  box-shadow:
     0 20px 40px -10px rgba(17, 13, 36, 0.6),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.12),
     inset -2px -2px 5px rgba(0, 0, 0, 0.4);
@@ -79,7 +87,7 @@
   border-radius: 18px;
   font-weight: 700;
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 
+  box-shadow:
     0 8px 16px -4px rgba(112, 79, 230, 0.15),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.8),
     inset -1.5px -1.5px 4px rgba(112, 79, 230, 0.12);
@@ -88,7 +96,7 @@
 
 .clay-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 12px 20px -4px rgba(112, 79, 230, 0.22),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.9),
     inset -1.5px -1.5px 4px rgba(112, 79, 230, 0.15);
@@ -96,7 +104,7 @@
 
 .clay-btn:active {
   transform: translateY(1px) scale(0.98);
-  box-shadow: 
+  box-shadow:
     0 4px 8px -2px rgba(112, 79, 230, 0.15),
     inset 2px 2px 5px rgba(0, 0, 0, 0.15);
 }
@@ -105,7 +113,7 @@
   background: linear-gradient(135deg, #704fe6 0%, #5a34e3 100%);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 
+  box-shadow:
     0 10px 22px -6px rgba(99, 66, 235, 0.45),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.4),
     inset -1.5px -1.5px 4px rgba(35, 12, 120, 0.3);
@@ -113,7 +121,7 @@
 
 .clay-btn-primary:hover {
   background: linear-gradient(135deg, #7e5ef2 0%, #633bec 100%);
-  box-shadow: 
+  box-shadow:
     0 14px 26px -6px rgba(99, 66, 235, 0.55),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.5),
     inset -1.5px -1.5px 4px rgba(35, 12, 120, 0.3);
@@ -123,7 +131,7 @@
   background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 
+  box-shadow:
     0 10px 22px -6px rgba(225, 29, 72, 0.45),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.4),
     inset -1.5px -1.5px 4px rgba(159, 18, 57, 0.3);
@@ -132,7 +140,7 @@
 /* 6. Clay Badges & Pills */
 .clay-pill {
   border-radius: 9999px;
-  box-shadow: 
+  box-shadow:
     0 4px 10px -2px rgba(112, 79, 230, 0.12),
     inset 1px 1px 2px rgba(255, 255, 255, 0.9),
     inset -1px -1px 3px rgba(112, 79, 230, 0.08);
@@ -147,7 +155,7 @@
 /* 7. Clay Icon Container */
 .clay-icon {
   border-radius: 18px;
-  box-shadow: 
+  box-shadow:
     0 6px 14px -3px rgba(112, 79, 230, 0.16),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.95),
     inset -1.5px -1.5px 4px rgba(112, 79, 230, 0.1);
@@ -163,7 +171,7 @@
   background: #fdfcff;
   border-radius: 20px;
   border: 1.5px solid rgba(210, 199, 255, 0.8);
-  box-shadow: 
+  box-shadow:
     inset 2px 2px 5px rgba(112, 79, 230, 0.06),
     inset -2px -2px 5px rgba(255, 255, 255, 0.9),
     0 2px 6px rgba(0, 0, 0, 0.02);
@@ -173,7 +181,7 @@
 .clay-input:focus {
   background: #ffffff;
   border-color: #6d46eb;
-  box-shadow: 
+  box-shadow:
     0 0 0 4px rgba(112, 79, 230, 0.15),
     inset 1px 1px 3px rgba(112, 79, 230, 0.05);
 }
@@ -181,40 +189,53 @@
 
 
 @keyframes float-gentle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-10px) rotate(2deg);
   }
 }
 
 @keyframes float-reverse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(10px) rotate(-2deg);
   }
 }
 
 @keyframes float-slow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0px, 0px) scale(1);
   }
+
   33% {
     transform: translate(20px, -20px) scale(1.06);
   }
+
   66% {
     transform: translate(-15px, 15px) scale(0.95);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.55;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.9;
     transform: scale(1.15);
@@ -222,18 +243,24 @@
 }
 
 @keyframes wave-bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     height: 8px;
   }
+
   50% {
     height: 32px;
   }
 }
 
 @keyframes emergency-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(244, 63, 94, 0.4), 0 0 40px rgba(112, 79, 230, 0.2);
   }
+
   50% {
     box-shadow: 0 0 35px rgba(244, 63, 94, 0.75), 0 0 60px rgba(112, 79, 230, 0.45);
   }
@@ -244,9 +271,11 @@
     transform: scale(0.85);
     opacity: 0;
   }
+
   70% {
     transform: scale(1.04);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;

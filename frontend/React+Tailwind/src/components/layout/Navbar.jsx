@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSimulation, VIEWS, LANGUAGES, SIMULATION_STATES } from '../../context/SimulationContext';
-import { 
-  ShieldCheck, 
-  Users, 
-  Stethoscope, 
-  Building2, 
-  Globe, 
-  ChevronDown, 
+import {
+  ShieldCheck,
+  Users,
+  Stethoscope,
+  Building2,
+  Globe,
+  ChevronDown,
   AlertTriangle,
   Activity,
   CheckCircle2,
@@ -45,7 +45,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-purple-200/70 bg-white/80 backdrop-blur-xl shadow-xs transition-all duration-200">
-      
+
       {/* Top micro-bar for Government Notice & System Health */}
       <div className="bg-linear-to-r from-purple-950 via-indigo-950 to-purple-950 text-purple-200 text-[11px] px-4 py-1.5 flex items-center justify-between border-b border-purple-900/40">
         <div className="flex items-center gap-2">
@@ -69,22 +69,22 @@ export default function Navbar() {
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-17 gap-2 sm:gap-4">
-          
+
           {/* LEFT: Brand Logo & Institutional Emblem */}
           <div className="flex items-center gap-3.5 shrink-0">
-            <div 
-              className="relative group cursor-pointer" 
+            <div
+              className="relative group cursor-pointer"
               onClick={() => setCurrentView(VIEWS.CITIZEN)}
             >
               {/* Subtle lavender glow ring */}
-              <div 
+              <div
                 className="absolute -inset-1 rounded-2xl opacity-75 blur-xs transition duration-300 bg-linear-to-r from-purple-400 to-indigo-400 group-hover:opacity-100 group-hover:scale-105"
               />
 
               <div className="relative flex items-center justify-center w-11 h-11 rounded-2xl bg-white shadow-md shadow-purple-500/15 border border-purple-200/80 p-1 overflow-hidden transition-transform duration-200 group-hover:scale-102">
-                <img 
-                  src="/favicon.png" 
-                  alt="Samvedna AI" 
+                <img
+                  src="/favicon.png"
+                  alt="Samvedna AI"
                   className="w-full h-full object-contain rounded-xl"
                 />
               </div>
@@ -101,16 +101,15 @@ export default function Navbar() {
 
           {/* CENTER: Claymorphic Segmented View Switcher Pills */}
           <div className="hidden lg:flex items-center p-1.5 bg-[#ede8fc]/90 rounded-2xl border border-purple-200/70 shadow-inner">
-            
+
             {/* Citizen Portal */}
             <button
               id="nav-citizen-portal-btn"
               onClick={() => setCurrentView(VIEWS.CITIZEN)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
-                currentView === VIEWS.CITIZEN
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${currentView === VIEWS.CITIZEN
                   ? 'bg-white text-[#5932ea] shadow-md shadow-purple-500/15 border border-purple-200/80 scale-[1.02]'
                   : 'text-purple-900/70 hover:text-purple-950 hover:bg-white/50'
-              }`}
+                }`}
             >
               <Users className={`w-4 h-4 ${currentView === VIEWS.CITIZEN ? 'text-[#6342eb]' : 'text-purple-500'}`} />
               <span>Citizen Portal</span>
@@ -120,11 +119,10 @@ export default function Navbar() {
             <button
               id="nav-counselor-workspace-btn"
               onClick={() => setCurrentView(VIEWS.COUNSELOR)}
-              className={`relative flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
-                currentView === VIEWS.COUNSELOR
+              className={`relative flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${currentView === VIEWS.COUNSELOR
                   ? 'bg-white text-[#5932ea] shadow-md shadow-purple-500/15 border border-purple-200/80 scale-[1.02]'
                   : 'text-purple-900/70 hover:text-purple-950 hover:bg-white/50'
-              }`}
+                }`}
             >
               <Stethoscope className={`w-4 h-4 ${currentView === VIEWS.COUNSELOR ? 'text-[#6342eb]' : 'text-purple-500'}`} />
               <span>Counselor Workspace</span>
@@ -140,11 +138,10 @@ export default function Navbar() {
             <button
               id="nav-admin-command-btn"
               onClick={() => setCurrentView(VIEWS.ADMIN)}
-              className={`relative flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
-                currentView === VIEWS.ADMIN
+              className={`relative flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${currentView === VIEWS.ADMIN
                   ? 'bg-white text-[#5932ea] shadow-md shadow-purple-500/15 border border-purple-200/80 scale-[1.02]'
                   : 'text-purple-900/70 hover:text-purple-950 hover:bg-white/50'
-              }`}
+                }`}
             >
               <Building2 className={`w-4 h-4 ${currentView === VIEWS.ADMIN ? 'text-[#6342eb]' : 'text-purple-500'}`} />
               <span>Admin Command Center</span>
@@ -158,7 +155,7 @@ export default function Navbar() {
 
           {/* RIGHT: Language Selector & District Profile Pill */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            
+
             {/* Language Selector Dropdown with Claymorphic button */}
             <div className="relative" ref={langDropdownRef}>
               <button
@@ -183,9 +180,8 @@ export default function Navbar() {
                         setLanguage(item.id);
                         setIsLangOpen(false);
                       }}
-                      className={`w-full text-left px-3.5 py-2 text-xs flex items-center justify-between hover:bg-purple-50 transition-colors cursor-pointer ${
-                        language === item.id ? 'bg-purple-50 text-[#5932ea] font-bold' : 'text-slate-700'
-                      }`}
+                      className={`w-full text-left px-3.5 py-2 text-xs flex items-center justify-between hover:bg-purple-50 transition-colors cursor-pointer ${language === item.id ? 'bg-purple-50 text-[#5932ea] font-bold' : 'text-slate-700'
+                        }`}
                     >
                       <span>{item.label}</span>
                       {language === item.id && (
@@ -221,11 +217,10 @@ export default function Navbar() {
         <div className="flex lg:hidden items-center justify-around py-2 border-t border-purple-100 gap-1.5">
           <button
             onClick={() => setCurrentView(VIEWS.CITIZEN)}
-            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all ${
-              currentView === VIEWS.CITIZEN
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all ${currentView === VIEWS.CITIZEN
                 ? 'bg-white text-[#5932ea] shadow-xs border border-purple-200'
                 : 'text-purple-800/70 hover:bg-purple-50'
-            }`}
+              }`}
           >
             <Users className="w-3.5 h-3.5" />
             <span>Citizen</span>
@@ -233,11 +228,10 @@ export default function Navbar() {
 
           <button
             onClick={() => setCurrentView(VIEWS.COUNSELOR)}
-            className={`flex-1 relative flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all ${
-              currentView === VIEWS.COUNSELOR
+            className={`flex-1 relative flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all ${currentView === VIEWS.COUNSELOR
                 ? 'bg-white text-[#5932ea] shadow-xs border border-purple-200'
                 : 'text-purple-800/70 hover:bg-purple-50'
-            }`}
+              }`}
           >
             <Stethoscope className="w-3.5 h-3.5" />
             <span>Counselor</span>
@@ -248,11 +242,10 @@ export default function Navbar() {
 
           <button
             onClick={() => setCurrentView(VIEWS.ADMIN)}
-            className={`flex-1 relative flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all ${
-              currentView === VIEWS.ADMIN
+            className={`flex-1 relative flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold transition-all ${currentView === VIEWS.ADMIN
                 ? 'bg-white text-[#5932ea] shadow-xs border border-purple-200'
                 : 'text-purple-800/70 hover:bg-purple-50'
-            }`}
+              }`}
           >
             <Building2 className="w-3.5 h-3.5" />
             <span>Admin</span>
