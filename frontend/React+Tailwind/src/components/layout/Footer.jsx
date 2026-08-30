@@ -43,7 +43,7 @@ export default function Footer() {
             </div>
 
             <p className="text-xs text-purple-900/80 leading-relaxed max-w-md">
-              AI-powered SC/ST protection and trauma support system for real-time distress detection, trauma triage, and institutional grievance redressal.
+             <strong>Ministry of Social Justice and Empowerment (MoSJE), Govt. of India</strong> • SC/ST Protection & Trauma Relief System. Real-time acoustic distress biomarker analysis, linguistic trauma triage, and automated institutional grievance redressal under the PoA Act.
             </p>
           </div>
 
@@ -145,7 +145,7 @@ export default function Footer() {
 
         {/* Bottom Micro-Bar / Copyright */}
         <div className="pt-6 border-t border-purple-200/70 text-center text-xs text-purple-900/70">
-          <span className="font-semibold text-slate-800">© 2026 Samvedna AI · SIH 2026</span>
+          <span className="font-semibold text-slate-800">© 2026 Samvedna AI</span>
         </div>
 
       </div>

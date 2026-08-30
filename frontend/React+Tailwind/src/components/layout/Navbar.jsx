@@ -88,8 +88,8 @@ export default function Navbar() {
 
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-heading font-extrabold text-xl sm:text-2xl tracking-tight text-slate-900 flex items-center">
-                  Samvedna<span className="text-[#6342eb] font-black">AI</span>
+                <span className="font-heading font-extrabold text-xl sm:text-2xl tracking-tight text-slate-900 flex items-center gap-1">
+                  Samvedna <span className="text-[#6342eb] font-black">AI</span>
                 </span>
               </div>
               <p className="hidden md:block text-[10px] font-medium text-purple-800/70 tracking-tight">
