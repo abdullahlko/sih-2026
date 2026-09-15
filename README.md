@@ -3,11 +3,11 @@
   <img src="frontend/React%2BTailwind/public/favicon.png" alt="Samvedna AI logo" width="52" align="center" />
 </h1>
 
-> An empathetic, role-based support and case-triage platform for SC/ST atrocity survivors—designed to help surface distress signals, coordinate counselor response, and support administrative oversight.
+> An empathetic, role-based support and case-triage platform for SC/ST atrocity survivors—designed to help surface distress signals, coordinate counselor response and support administrative oversight.
 
-Samvedna AI brings together a citizen-facing check-in experience, a counselor workspace, and an administrative command centre. The project is being built for **Smart India Hackathon 2026** as a prototype for more timely, trauma-informed support and grievance follow-up.
+Samvedna AI brings together a citizen-facing check-in experience, a counselor workspace and an administrative command centre. The project is being built for **Smart India Hackathon 2026** as a prototype for more timely, trauma-informed support and grievance follow-up.
 
-> **Prototype notice:** This project is a demonstration and decision-support prototype. It must not be used as the sole basis for emergency, legal, clinical, or welfare decisions. Any real deployment requires expert review, security hardening, privacy impact assessment, and integration with authorised government workflows.
+> **Prototype notice:** This project is a demonstration and decision-support prototype. It must not be used as the sole basis for emergency, legal, clinical or welfare decisions. Any real deployment requires expert review, security hardening, privacy impact assessment and integration with authorised government workflows.
 
 ## Why Samvedna AI?
 
@@ -15,13 +15,13 @@ Support needs can change quickly after a grievance is filed. Samvedna AI explore
 
 ## Highlights
 
-- **Three tailored experiences** — citizen portal, counselor workspace, and administrative command centre.
+- **Three tailored experiences** - citizen portal, counselor workspace and administrative command centre.
 - **Multilingual-friendly interface** for approachable citizen interactions.
 - **Text and voice check-in flow** designed to capture a survivor’s current situation.
 - **Dynamic Distress Score (DDS) concept** to visualise changing case risk over time.
 - **Counselor case queue** with case-level risk context and intervention controls.
 - **Explainable-AI interface concept** that presents contributing signals rather than a black-box score.
-- **Administrative dashboard** with alerts, metrics, geographic hotspot visualisation, and SMS/IVRS fallback simulation.
+- **Administrative dashboard** with alerts, metrics, geographic hotspot visualisation and SMS/IVRS fallback simulation.
 - **Role-based backend APIs** for victims and counselors, secured with JWT authentication.
 
 ## Product walkthrough
@@ -45,9 +45,9 @@ The frontend currently provides an interactive demonstration of this journey. It
 
 | Area | Primary user | Purpose |
 | --- | --- | --- |
-| Citizen Portal | Survivor / citizen | Submit a text or voice check-in, choose a language, and access supportive guidance. |
-| Counselor Workspace | Trained counselor | Review assigned cases, prioritise alerts, inspect DDS context, and initiate follow-up actions. |
-| Admin Command Center | Authorised administrator | Monitor aggregate alerts, district patterns, and simulated IVRS/SMS fallback events. |
+| Citizen Portal | Survivor / citizen | Submit a text or voice check-in, choose a language and access supportive guidance. |
+| Counselor Workspace | Trained counselor | Review assigned cases, prioritise alerts, inspect DDS context and initiate follow-up actions. |
+| Admin Command Center | Authorised administrator | Monitor aggregate alerts, district patterns and simulated IVRS/SMS fallback events. |
 
 ## Technology
 
@@ -188,27 +188,27 @@ Use the returned bearer token in the Swagger UI or in the `Authorization: Bearer
 | Available now | Planned / in progress |
 | --- | --- |
 | Interactive three-role frontend demo and alert simulations | Production connection between frontend and backend |
-| User, victim-profile, counselor-profile, and interaction-log data models | Validated distress-scoring pipeline |
+| User, victim-profile, counselor-profile and interaction-log data models | Validated distress-scoring pipeline |
 | Victim and counselor registration, JWT login, protected endpoints | Real audio processing and voice-stress analysis |
 | Database migrations and async PostgreSQL access | Approved SMS/IVRS provider integration |
-| Counselor case retrieval | Accessibility, consent, retention, audit, and operational safeguards for deployment |
+| Counselor case retrieval | Accessibility, consent, retention, audit and operational safeguards for deployment |
 
 ## Privacy, safety, and responsible use
 
 Samvedna AI is intended to be developed with survivor dignity, consent, and data minimisation as core requirements. Before handling real personal or highly sensitive data, the project needs, at minimum:
 
 - explicit and understandable consent flows;
-- strict role-based access, audit logs, and least-privilege administration;
+- strict role-based access, audit logs and least-privilege administration;
 - encryption in transit and at rest, plus secure key management;
 - retention and deletion policies approved by the responsible authority;
-- human review, appeal paths, and clear escalation protocols;
-- security testing, accessibility testing, and legal/privacy review.
+- human review, appeal paths and clear escalation protocols;
+- security testing, accessibility testing and legal/privacy review.
 
 The UI references relevant legal and policy contexts only as a product concept; it is not legal advice and does not establish compliance.
 
 ## Contributing
 
-Contributions are welcome. Please keep pull requests focused and include a clear description of the user need, implementation, and validation performed.
+Contributions are welcome. Please keep pull requests focused and include a clear description of the user need, implementation and validation performed.
 
 ```bash
 # Frontend checks
