@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import {
-  ArrowRight, BarChart3, BotMessageSquare, ChevronDown, CirclePlay,
-  Globe2, Heart, Landmark, Languages, Menu, MessageCircle, ShieldCheck,
+  ArrowRight, BarChart3, BotMessageSquare, ChevronDown,
+  Globe2, Heart, Landmark, Menu, MessageCircle, ShieldCheck,
   Sparkles, Stethoscope, UsersRound, X
 } from 'lucide-react'
 
-/* ─── data ─── */
+/* ─────────────────────────── DATA ─────────────────────────── */
+
 const roleCards = [
   {
     icon: UsersRound,
@@ -14,7 +15,7 @@ const roleCards = [
     action: 'Enter Citizen Portal',
     href: '#citizen',
     tone: 'blue',
-    imgUrl: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80',
+    imgUrl: '/images/landing/citizen.png',
   },
   {
     icon: Stethoscope,
@@ -23,7 +24,7 @@ const roleCards = [
     action: 'Open Counselor Workspace',
     href: '#counselor',
     tone: 'green',
-    imgUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
+    imgUrl: '/images/landing/counsellor.png',
   },
   {
     icon: BarChart3,
@@ -32,16 +33,16 @@ const roleCards = [
     action: 'View Command Centre',
     href: '#admin',
     tone: 'orange',
-    imgUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80',
+    imgUrl: '/images/landing/administrator.png',
   },
 ]
 
 const workflow = [
-  [MessageCircle, 'Citizen\nCheck-in', '(Text / Voice)'],
-  [BotMessageSquare, 'Distress\nAssessment', '( AI Analysis )'],
-  [Stethoscope, 'Counselor\nTriage', '(Human Review)'],
-  [ShieldCheck, 'Intervention\n& Support', '(Coordinated Action)'],
-  [Landmark, 'Administrative\nOversight', '(Monitor & Improve)'],
+  { Icon: MessageCircle, title: 'Citizen\nCheck-in', sub: '(Text / Voice)' },
+  { Icon: BotMessageSquare, title: 'Distress\nAssessment', sub: '( AI Analysis )' },
+  { Icon: Stethoscope, title: 'Counselor\nTriage', sub: '(Human Review)' },
+  { Icon: ShieldCheck, title: 'Intervention\n& Support', sub: '(Coordinated Action)' },
+  { Icon: Landmark, title: 'Administrative\nOversight', sub: '(Monitor & Improve)' },
 ]
 
 const navLinks = [
@@ -55,6 +56,14 @@ const navLinks = [
   { label: 'Resources', href: '#resources' },
 ]
 
+const impactItems = [
+  { Icon: ShieldCheck, title: 'Safer Communities', sub: 'Through Timely Support', color: 'text-violet-600' },
+  { Icon: Sparkles, title: 'Data-Driven Insights', sub: 'For Informed Action', color: 'text-violet-600' },
+  { Icon: Globe2, title: 'Multi-Lingual & Accessible', sub: 'Across Regions', color: 'text-violet-600' },
+  { Icon: Heart, title: 'A More Inclusive India', sub: 'Built on Dignity and Justice', color: 'text-rose-500' },
+]
+
+/* tone styling maps */
 const toneBg = {
   blue: 'bg-gradient-to-br from-[#eef5ff] via-[#f7fbff] to-[#e6edff]',
   green: 'bg-gradient-to-br from-[#edfcf7] via-[#f7fffc] to-[#e3f8ef]',
@@ -70,32 +79,44 @@ const toneLink = {
   green: 'text-[#049a67]',
   orange: 'text-[#fb7618]',
 }
+const toneFade = {
+  blue: 'rgba(238,245,255,.95)',
+  green: 'rgba(237,252,247,.95)',
+  orange: 'rgba(255,245,237,.95)',
+}
 
-/* ─── tiny logo ─── */
-function LotusMark() {
+/* ─────────────────────────── LOGO ─────────────────────────── */
+
+function LogoMark() {
   return (
-    <span className="relative grid size-11 place-items-center shrink-0" aria-hidden="true">
-      <span className="absolute size-6 rotate-45 rounded-tl-[100%] rounded-br-[100%] bg-violet-700" />
-      <span className="absolute size-6 -rotate-45 rounded-tr-[100%] rounded-bl-[100%] bg-indigo-500" />
-      <span className="absolute h-8 w-3.5 rounded-t-full bg-gradient-to-t from-violet-700 to-fuchsia-400" />
-    </span>
+    <img
+      src="/favicon.png"
+      alt="Samvedna AI Logo"
+      className="size-11 object-contain shrink-0"
+    />
   )
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ═══════════════════════════════════════════════════════════════
+   LANDING PAGE — "Stronger Support for a Fairer Tomorrow"
+   This is the NEW entry landing page (image 2).
+   Navigation links (#citizen, #counselor, #admin) redirect
+   to the existing app (image 1) via hash routing in App.jsx.
+   ═══════════════════════════════════════════════════════════════ */
+
 export default function LandingPage() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#fbfbff] font-sans text-[#07164e]">
 
-      {/* ════════════ NAVBAR ════════════ */}
+      {/* ═══════════════════ NAVBAR ═══════════════════ */}
       <header className="sticky top-0 z-50 border-b border-violet-100 bg-white/92 shadow-[0_4px_20px_rgba(77,69,188,.06)] backdrop-blur-lg">
         <nav className="mx-auto flex h-[62px] max-w-[1400px] items-center justify-between gap-4 px-5 lg:px-8">
 
-          {/* logo */}
-          <a href="#top" className="flex shrink-0 items-center gap-1.5">
-            <LotusMark />
+          {/* Logo */}
+          <a href="#top" className="flex shrink-0 items-center gap-2">
+            <LogoMark />
             <span>
               <span className="block text-[22px] font-extrabold leading-5 tracking-tight">
                 Samvedna <b className="text-violet-600">AI</b>
@@ -106,7 +127,7 @@ export default function LandingPage() {
             </span>
           </a>
 
-          {/* desktop nav links */}
+          {/* Desktop nav */}
           <div className="hidden h-full items-center gap-6 text-[12.5px] font-medium text-[#293060] lg:flex">
             {navLinks.map(l => (
               <a
@@ -121,28 +142,28 @@ export default function LandingPage() {
             ))}
           </div>
 
-          {/* right side */}
+          {/* Right */}
           <div className="flex shrink-0 items-center gap-3">
-            <span className="hidden items-center gap-1.5 text-[12px] font-semibold text-[#364478] xl:flex cursor-pointer">
+            <span className="hidden cursor-pointer items-center gap-1.5 text-[12px] font-semibold text-[#364478] xl:flex">
               <Globe2 size={16} /> English <ChevronDown size={12} />
             </span>
-            <a
-              href="#citizen"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-700 to-violet-600 px-5 py-2.5 text-[13px] font-bold text-white shadow-lg shadow-violet-300/50 transition hover:shadow-violet-400/60"
+            <button
+              type="button"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-700 to-violet-600 px-5 py-2.5 text-[13px] font-bold text-white shadow-lg shadow-violet-300/50 transition hover:shadow-violet-400/60 cursor-pointer"
             >
-              Get Support <ArrowRight size={16} />
-            </a>
-            {/* mobile hamburger */}
+              Sign In
+            </button>
             <button
               className="grid size-10 place-items-center rounded-xl text-violet-700 lg:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </nav>
 
-        {/* mobile nav drawer */}
+        {/* Mobile drawer */}
         {mobileOpen && (
           <div className="border-t border-violet-100 bg-white px-6 py-4 lg:hidden">
             <div className="flex flex-col gap-3">
@@ -151,7 +172,7 @@ export default function LandingPage() {
                   key={l.label}
                   href={l.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`text-[14px] font-medium ${l.active ? 'font-bold text-violet-700' : 'text-[#364478]'}`}
+                  className={`text-sm font-medium ${l.active ? 'font-bold text-violet-700' : 'text-[#364478]'}`}
                 >
                   {l.label}
                 </a>
@@ -163,21 +184,32 @@ export default function LandingPage() {
 
       <main id="top">
 
-        {/* ════════════ HERO ════════════ */}
-        <section className="relative isolate overflow-hidden bg-[linear-gradient(110deg,#f8fbff_4%,#fff9f8_55%,#fff4e9_100%)]">
-          {/* decorative radial blobs */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-[70%] bg-[radial-gradient(ellipse_at_65%_18%,rgba(207,193,255,.75),transparent_30%),radial-gradient(ellipse_at_85%_65%,rgba(255,215,151,.7),transparent_28%)]" />
+        {/* ═══════════════════ HERO ═══════════════════ */}
+        <section className="relative isolate overflow-hidden">
+          {/* Full-width hero background image with subtle brightness reduction (-6%) */}
+          <div className="absolute inset-0 -z-20">
+            <img
+              src="/images/landing/hero.png"
+              alt="Samvedna AI – advocate standing before the Indian Parliament"
+              className="h-full w-full object-cover object-[center_top] brightness-[0.94] contrast-[1.01]"
+            />
+          </div>
 
-          <div className="mx-auto grid min-h-[460px] max-w-[1400px] items-end px-6 pt-8 lg:grid-cols-[44%_56%] lg:px-8">
-            {/* LEFT – copy */}
-            <div className="relative z-10 pb-8 lg:pb-10">
+          {/* Soft ambient overlay */}
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-10 bg-gradient-to-t from-[#fbfbff]/60 to-transparent" />
+
+          <div className="mx-auto min-h-[460px] max-w-[1400px] px-6 pt-8 pb-12 lg:min-h-[520px] lg:px-8">
+
+            {/* LEFT — copy (sits on top of image with gradient overlay behind) */}
+            <div className="relative z-10 max-w-[560px]">
               {/* MoSJE badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/80 px-3.5 py-2 text-[11px] font-bold text-[#1e3058] shadow-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/90 px-3.5 py-2 text-[11px] font-bold text-[#1e3058] shadow-sm backdrop-blur-sm">
                 <Landmark size={15} className="text-slate-600" />
                 An Initiative by MoSJE, Government of India
               </div>
 
-              {/* heading */}
+              {/* Heading */}
               <h1 className="mt-6 text-[40px] font-extrabold leading-[1.02] tracking-[-.04em] sm:text-[52px] xl:text-[60px]">
                 Stronger Support<br />
                 <span className="bg-gradient-to-r from-indigo-700 via-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
@@ -185,14 +217,15 @@ export default function LandingPage() {
                 </span>
               </h1>
 
-              <p className="mt-4 max-w-[540px] text-[15px] leading-[1.55] text-[#3a507f]">
+              {/* Description */}
+              <p className="mt-4 max-w-[500px] text-[15px] leading-[1.55] text-[#3a507f]">
                 Samvedna AI is an empathetic, role-based support and case-triage
                 platform for SC/ST atrocity survivors — designed to help surface
                 distress signals, coordinate counselor response and enable
                 administrative oversight.
               </p>
 
-              {/* CTA buttons */}
+              {/* CTA button */}
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href="#citizen"
@@ -200,15 +233,9 @@ export default function LandingPage() {
                 >
                   Get Support Now <ArrowRight size={18} />
                 </a>
-                <a
-                  href="#how"
-                  className="inline-flex items-center gap-2.5 rounded-xl border border-violet-400 bg-white/80 px-6 py-3.5 text-[14px] font-semibold text-violet-700 transition hover:bg-violet-50"
-                >
-                  <CirclePlay size={20} className="fill-violet-600 text-white" /> Explore the Platform
-                </a>
               </div>
 
-              {/* trust badges */}
+              {/* Trust badges */}
               <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2 text-[12px] font-medium text-[#1e3058]">
                 <span className="flex items-center gap-2">
                   <ShieldCheck size={18} className="text-violet-600" /> Confidential &amp; Secure
@@ -221,55 +248,16 @@ export default function LandingPage() {
                 </span>
               </div>
             </div>
-
-            {/* RIGHT – hero visual */}
-            <div className="relative h-[340px] lg:h-[460px]">
-              {/* LISTEN SUPPORT EMPOWER JUSTICE */}
-              <div className="absolute left-[18%] top-6 hidden flex-col gap-2.5 text-[11px] tracking-[.42em] text-[#2c3e70] lg:flex" style={{ fontFamily: 'Georgia, serif' }}>
-                <span className="font-semibold">LISTEN</span>
-                <span className="font-semibold">SUPPORT</span>
-                <span className="font-semibold">EMPOWER</span>
-                <span className="font-semibold">JUSTICE</span>
-                <i className="mt-1 h-px w-8 bg-violet-500" />
-              </div>
-
-              {/* floating decorative text */}
-              <div className="absolute right-[2%] top-[10%] z-10 hidden max-w-[150px] -rotate-[7deg] xl:block" style={{ fontFamily: 'Georgia, serif' }}>
-                <p className="text-[16px] italic leading-[1.35] text-[#2e3462]">
-                  Equal Rights<br />Stronger Communities<br />A Kinder India
-                </p>
-                <hr className="my-3 w-8 border-violet-500" />
-                <p className="mt-5 translate-x-[20%] text-[14px] italic leading-[1.4] text-[#3c4072]">
-                  "A more inclusive<br />and compassionate<br />India is possible."
-                </p>
-              </div>
-
-              {/* hero image */}
-              <div className="absolute inset-x-[2%] bottom-0 overflow-hidden">
-                <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-[rgba(8,18,50,.35)] to-transparent" />
-                <img
-                  src="/images/landing/hero.png"
-                  alt="Samvedna AI – advocate standing before the Indian Parliament"
-                  className="h-[420px] w-full object-cover object-[63%_47%]"
-                  style={{
-                    maskImage: 'linear-gradient(to bottom, transparent 2%, black 14%, black 92%, transparent)',
-                    WebkitMaskImage: 'linear-gradient(to bottom, transparent 2%, black 14%, black 92%, transparent)',
-                  }}
-                />
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* ════════════ ROLE CARDS ════════════ */}
+        {/* ═══════════════════ ROLE CARDS ═══════════════════ */}
         <section className="mx-auto grid max-w-[1400px] gap-4 px-6 py-4 md:grid-cols-3 lg:px-8">
           {roleCards.map(({ icon: Icon, title, text, action, href, tone, imgUrl }) => (
             <article
               key={title}
-              id={title.includes('Citizens') ? 'citizens' : title.includes('Counselors') ? 'counselors' : 'administrators'}
               className={`group relative min-h-[175px] overflow-hidden rounded-2xl border border-white/80 p-6 shadow-[0_8px_28px_rgba(69,83,160,.08)] transition hover:shadow-lg ${toneBg[tone]}`}
             >
-              {/* content */}
               <div className="relative z-10 max-w-[62%]">
                 <div className="flex items-center gap-3">
                   <div className={`grid size-12 shrink-0 place-items-center rounded-xl ${toneIcon[tone]}`}>
@@ -286,23 +274,23 @@ export default function LandingPage() {
                 </a>
               </div>
 
-              {/* background image */}
-              <div
-                className="absolute inset-y-0 right-0 w-[46%] opacity-40 transition group-hover:opacity-50"
-                style={{
-                  backgroundImage: `linear-gradient(to right, ${tone === 'blue' ? 'rgba(238,245,255,.95)' : tone === 'green' ? 'rgba(237,252,247,.95)' : 'rgba(255,245,237,.95)'}, transparent 40%), url('${imgUrl}')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              />
+              {/* Local card image */}
+              <div className="absolute inset-y-0 right-0 w-[54%] overflow-hidden pointer-events-none">
+                <img
+                  src={imgUrl}
+                  alt={title}
+                  className="h-full w-full object-cover object-right opacity-90 transition-transform duration-300 group-hover:scale-105 group-hover:opacity-100"
+                />
+              </div>
             </article>
           ))}
         </section>
 
-        {/* ════════════ HOW IT WORKS ════════════ */}
+        {/* ═══════════════════ HOW IT WORKS ═══════════════════ */}
         <section id="how" className="mx-auto max-w-[1400px] px-6 pt-2 pb-3 lg:px-8">
           <div className="rounded-2xl border border-violet-100 bg-white px-6 py-6 shadow-[0_6px_24px_rgba(63,65,150,.06)] lg:px-8">
             <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
+
               {/* left label */}
               <div>
                 <p className="text-[11px] font-bold tracking-[.16em] text-[#3b4c82]">
@@ -318,9 +306,9 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* workflow steps */}
+              {/* 5 workflow steps */}
               <div className="grid items-center gap-2 sm:grid-cols-5">
-                {workflow.map(([Icon, title, sub], i) => (
+                {workflow.map(({ Icon, title, sub }, i) => (
                   <div key={title} className="relative text-center">
                     <div className="mx-auto grid size-[52px] place-items-center rounded-full bg-gradient-to-br from-violet-100 to-white text-violet-600 shadow-sm ring-1 ring-violet-100/60">
                       <Icon size={22} />
@@ -342,15 +330,10 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ════════════ FEATURES / IMPACT BAR ════════════ */}
+        {/* ═══════════════════ FEATURES / IMPACT BAR ═══════════════════ */}
         <section id="features" className="mt-2 border-y border-violet-100 bg-white">
           <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-y-5 px-6 py-5 md:grid-cols-4 lg:px-8">
-            {[
-              [ShieldCheck, 'Safer Communities', 'Through Timely Support', 'text-violet-600'],
-              [Sparkles, 'Data-Driven Insights', 'For Informed Action', 'text-violet-600'],
-              [Globe2, 'Multi-Lingual & Accessible', 'Across Regions', 'text-violet-600'],
-              [Heart, 'A More Inclusive India', 'Built on Dignity and Justice', 'text-rose-500'],
-            ].map(([Icon, title, copy, color], i) => (
+            {impactItems.map(({ Icon, title, sub, color }, i) => (
               <div
                 key={title}
                 className={`flex items-center justify-center gap-3.5 ${
@@ -360,7 +343,7 @@ export default function LandingPage() {
                 <Icon className={color} size={28} />
                 <div>
                   <h3 className="text-[14px] font-extrabold leading-tight">{title}</h3>
-                  <p className="text-[11px] text-[#4a5b93]">{copy}</p>
+                  <p className="text-[11px] text-[#4a5b93]">{sub}</p>
                 </div>
               </div>
             ))}
@@ -368,7 +351,7 @@ export default function LandingPage() {
         </section>
       </main>
 
-      {/* ════════════ FOOTER ════════════ */}
+      {/* ═══════════════════ FOOTER ═══════════════════ */}
       <footer id="resources" className="bg-gradient-to-r from-[#f3f5ff] to-white">
         <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-6 px-6 py-6 text-center md:flex-row md:text-left lg:px-8">
           {/* Ministry */}
@@ -382,7 +365,7 @@ export default function LandingPage() {
 
           {/* Quote */}
           <p className="text-[19px] italic text-[#41467b]" style={{ fontFamily: 'Georgia, serif' }}>
-            "Justice is not a privilege. It is a right."
+            &ldquo;Justice is not a privilege. It is a right.&rdquo;
           </p>
 
           {/* Viksit Bharat */}
