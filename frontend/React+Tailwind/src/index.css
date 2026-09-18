@@ -332,3 +332,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(124, 58, 237, 0.7);
 }
+
+/* Samvedna landing-page role panels */
+.role-blue { background: linear-gradient(110deg, #eef5ff 0%, #f7fbff 65%, #e6edff 100%); }
+.role-green { background: linear-gradient(110deg, #edfcf7 0%, #f7fffc 65%, #e3f8ef 100%); }
+.role-orange { background: linear-gradient(110deg, #fff5ed 0%, #fffaf6 65%, #fff0e5 100%); }
+.role-icon-blue { color: #244cff; background: #dfe9ff; }
+.role-icon-green { color: #049a67; background: #d9f6e9; }
+.role-icon-orange { color: #fb7618; background: #ffeadb; }
+.role-image-citizen { background: linear-gradient(90deg, transparent, rgba(238,245,255,.25)), url('/images/landing/hero.png') center / cover; }
+.role-image-counselor { background: linear-gradient(90deg, transparent, rgba(237,252,247,.25)), url('/images/landing/hero.png') 72% center / cover; }
+.role-image-admin { background: linear-gradient(90deg, transparent, rgba(255,245,237,.2)), url('/images/landing/hero.png') right center / cover; }

@@ -1,100 +1,33 @@
-import React from 'react';
-import { SimulationProvider, useSimulation, VIEWS, SIMULATION_STATES } from './context/SimulationContext';
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import SimulationControlPanel from './components/layout/SimulationControlPanel';
-import DpdpModal from './components/layout/DpdpModal';
-import CitizenPortal from './components/citizen/CitizenPortal';
-import CounselorWorkspace from './components/counselor/CounselorWorkspace';
-import AdminCommandCenter from './components/admin/AdminCommandCenter';
-import InteractiveBackground from './components/layout/InteractiveBackground';
-import { AlertOctagon, PhoneCall, ShieldAlert, ArrowRight, ShieldCheck, Sparkles, Heart } from 'lucide-react';
+import { useEffect, useState } from 'react'
+import { ArrowLeft } from 'lucide-react'
+import { SimulationProvider, useSimulation, VIEWS } from './context/SimulationContext'
+import LandingPage from './pages/LandingPage'
+import CitizenPortal from './components/citizen/CitizenPortal'
+import CounselorWorkspace from './components/counselor/CounselorWorkspace'
+import AdminCommandCenter from './components/admin/AdminCommandCenter'
 
-function MainAppShell() {
-  const {
-    currentView,
-    simulationState,
-    statePayload,
-    setCurrentView,
-    isDpdpOpen,
-    setIsDpdpOpen
-  } = useSimulation();
-  const isCritical = simulationState !== SIMULATION_STATES.SAFE;
+const routes = { citizen: VIEWS.CITIZEN, counselor: VIEWS.COUNSELOR, admin: VIEWS.ADMIN }
 
-  return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-[#f7f5ff] text-[#241c40] antialiased selection:bg-purple-500 selection:text-white">
+function RoutedApp() {
+  const { currentView, setCurrentView } = useSimulation()
+  const [isLanding, setIsLanding] = useState(() => !routes[window.location.hash.slice(1)])
 
-      {/* Interactive Particle Canvas Background */}
-      <InteractiveBackground />
+  useEffect(() => {
+    const syncRoute = () => {
+      const view = routes[window.location.hash.slice(1)]
+      if (view) { setCurrentView(view); setIsLanding(false) } else setIsLanding(true)
+    }
+    syncRoute()
+    window.addEventListener('hashchange', syncRoute)
+    return () => window.removeEventListener('hashchange', syncRoute)
+  }, [setCurrentView])
 
-      {/* Subtle overlay grid for depth */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-1" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(#8c65ff_0.8px,transparent_0.8px)] bg-size-[32px_32px] opacity-[0.07]" />
-      </div>
+  if (isLanding) return <LandingPage />
 
-      {/* 1. Master Navigation Bar */}
-      <Navbar />
+  const Portal = currentView === VIEWS.COUNSELOR ? CounselorWorkspace : currentView === VIEWS.ADMIN ? AdminCommandCenter : CitizenPortal
+  const label = currentView === VIEWS.COUNSELOR ? 'Counselor Workspace' : currentView === VIEWS.ADMIN ? 'Command Centre' : 'Citizen Portal'
 
-      {/* 2. Emergency Global Distress Broadcast Banner (Visible during CRITICAL_TEXT or CRITICAL_VOICE states) */}
-      {isCritical && (
-        <div
-          className={`w-full relative z-30 py-2.5 px-4 sm:px-6 lg:px-8 text-white transition-all duration-300 shadow-lg ${simulationState === SIMULATION_STATES.CRITICAL_TEXT
-            ? 'bg-linear-to-r from-rose-600 via-rose-500 to-rose-600 animate-emergency-glow'
-            : 'bg-linear-to-r from-purple-800 via-indigo-700 to-purple-800 animate-emergency-glow'
-            }`}
-        >
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs font-semibold">
-            <div className="flex items-center gap-2.5">
-              <span className="p-1.5 rounded-xl bg-white/20 shadow-inner">
-                <AlertOctagon className="w-4 h-4 text-white animate-bounce" />
-              </span>
-              <span>
-                <strong className="tracking-wide">CRITICAL DISTRESS TRIGGER FLAGGED:</strong> {statePayload.severityLabel} in {statePayload.firNumber} ({statePayload.activeVictimName})
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-white/90 text-[11px] hidden md:inline px-2.5 py-0.5 rounded-full bg-black/20">
-                Distress: <strong>{statePayload.distressScore}%</strong> | Jitter: <strong>{statePayload.voiceJitter}</strong>
-              </span>
-              {currentView !== VIEWS.COUNSELOR && (
-                <button
-                  onClick={() => setCurrentView(VIEWS.COUNSELOR)}
-                  className="px-3.5 py-1 rounded-xl bg-white text-purple-950 text-xs font-bold hover:bg-purple-50 transition-all shadow-md active:scale-95 flex items-center gap-1.5 cursor-pointer"
-                >
-                  <span>Open Triage Desk</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* 3. Main Viewport Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-7 pb-28 relative z-10">
-        {currentView === VIEWS.CITIZEN && <CitizenPortal />}
-        {currentView === VIEWS.COUNSELOR && <CounselorWorkspace />}
-        {currentView === VIEWS.ADMIN && <AdminCommandCenter />}
-      </main>
-
-      {/* 4. Footer with MoSJE Institutional Footer & DPDP Modal Trigger */}
-      <Footer />
-
-      {/* 5. Floating Developer Demo Simulation Switchboard */}
-      <SimulationControlPanel />
-
-      {/* 6. DPDP 2023 Compliance Modal */}
-      <DpdpModal isOpen={isDpdpOpen} onClose={() => setIsDpdpOpen(false)} />
-
-    </div>
-  );
+  return <div className="min-h-screen bg-[#f7f5ff] text-[#241c40]"><header className="sticky top-0 z-50 border-b border-violet-100 bg-white/90 backdrop-blur"><div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5"><a href="#top" className="inline-flex items-center gap-2 text-sm font-bold text-violet-700"><ArrowLeft size={17}/> Back to Samvedna AI</a><span className="rounded-full bg-violet-100 px-3 py-1.5 text-xs font-bold text-violet-800">{label}</span></div></header><main className="mx-auto max-w-7xl px-4 py-7 sm:px-6"><Portal /></main></div>
 }
 
-export default function App() {
-  return (
-    <SimulationProvider>
-      <MainAppShell />
-    </SimulationProvider>
-  );
-}
+export default function App() { return <SimulationProvider><RoutedApp /></SimulationProvider> }
