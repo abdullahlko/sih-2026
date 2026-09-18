@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import AuthModal from '../components/auth/AuthModal'
 import {
   ArrowRight, BarChart3, BotMessageSquare, ChevronDown,
   Globe2, Heart, Landmark, Menu, MessageCircle, ShieldCheck,
@@ -106,9 +107,18 @@ function LogoMark() {
 
 export default function LandingPage() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [isAuthOpen, setIsAuthOpen] = useState(false)
+  const [authRole, setAuthRole] = useState('citizen')
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#fbfbff] font-sans text-[#07164e]">
+
+      {/* Auth Modal for Sign In & Register */}
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        initialRole={authRole}
+      />
 
       {/* ═══════════════════ NAVBAR ═══════════════════ */}
       <header className="sticky top-0 z-50 border-b border-violet-100 bg-white/92 shadow-[0_4px_20px_rgba(77,69,188,.06)] backdrop-blur-lg">
@@ -149,6 +159,10 @@ export default function LandingPage() {
             </span>
             <button
               type="button"
+              onClick={() => {
+                setAuthRole('citizen')
+                setIsAuthOpen(true)
+              }}
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-700 to-violet-600 px-5 py-2.5 text-[13px] font-bold text-white shadow-lg shadow-violet-300/50 transition hover:shadow-violet-400/60 cursor-pointer"
             >
               Sign In
@@ -177,6 +191,16 @@ export default function LandingPage() {
                   {l.label}
                 </a>
               ))}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false)
+                  setIsAuthOpen(true)
+                }}
+                className="mt-2 w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-700 to-violet-600 text-white text-xs font-bold shadow-md shadow-violet-300/40"
+              >
+                Sign In
+              </button>
             </div>
           </div>
         )}
