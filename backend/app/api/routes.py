@@ -7,8 +7,9 @@ from typing import List, Optional, cast
 from app.db.session import get_async_session
 from app.db.models import User, UserRole, VictimProfile, CounselorProfile
 from app.api.deps import get_current_user, require_role
+from app.core.config import settings
 from app.core.security import verify_password, create_access_token, get_password_hash
-from app.schemas import Token, CheckInCreate, VictimCaseResponse, VictimRegister, CounselorRegister
+from app.schemas import Token, CheckInCreate, VictimCaseResponse, VictimRegister, CounselorRegister, AdminRegister
 
 router = APIRouter()
 
@@ -110,6 +111,37 @@ async def register_counselor(
     
     await db.commit()
     return {"message": "Counselor registered successfully"}
+
+# Endpoint to register a new admin
+@router.post("/auth/register/admin", status_code=status.HTTP_201_CREATED)
+async def register_admin(
+    data: AdminRegister,
+    db: AsyncSession = Depends(get_async_session)
+):
+    if data.invite_code != settings.ADMIN_INVITE_CODE:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Invalid admin invite code"
+        )
+
+    stmt = select(User).where(User.email == data.email)
+    result = await db.execute(stmt)
+    if result.scalars().first():
+        raise HTTPException(status_code=400, detail="Email already registered")
+
+    new_user = User(
+        email=data.email,
+        hashed_password=get_password_hash(data.password),
+        role=UserRole.ADMIN
+    )
+    db.add(new_user)
+    await db.commit()
+
+    return {
+        "message": "Admin registered successfully",
+        "email": new_user.email,
+        "role": new_user.role.value,
+    }
 
 # ---------------------------------------------------------
 # 2. Victim Routes
