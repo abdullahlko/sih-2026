@@ -33,3 +33,10 @@ class CounselorRegister(BaseModel):
     full_name: str
     district: str
     specialization: Optional[str] = None
+
+class AdminRegister(BaseModel):
+    email: str
+    password: str
+    full_name: str
+    district: Optional[str] = None
+    invite_code: str
