@@ -55,6 +55,37 @@ export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', in
     invite_code: ''
   });
 
+  const handleRequestInviteCode = () => {
+    const recipient = 'aisamvedna@gmail.com';
+    const subject = encodeURIComponent('Request for Administrator Invite Code - Samvedna AI');
+    const senderEmail = adminForm.email || counselorForm.email || '[Type Your Email Here]';
+    const senderName = adminForm.full_name || counselorForm.full_name || 'Administrator Applicant';
+    const district = adminForm.district || counselorForm.district || 'Alwar, Rajasthan';
+
+    const bodyText = `FROM EMAIL / APPLICANT EMAIL: ${senderEmail}
+APPLICANT NAME: ${senderName}
+DISTRICT JURISDICTION: ${district}
+
+==================================================
+Respected MoSJE Nodal Officer,
+
+I would like to request an Administrator Invite Code (Security Token) to register on the Samvedna AI platform.
+
+My Details:
+• Name: ${senderName}
+• Official Email: ${senderEmail}
+• District Jurisdiction: ${district}
+
+Please send the security token to my email address above (${senderEmail}).
+
+Thank you,
+${senderName}`;
+
+    const body = encodeURIComponent(bodyText);
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${subject}&body=${body}`;
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+  };
+
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
@@ -532,16 +563,27 @@ export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', in
                     <label className="block text-xs font-bold text-slate-700 mb-1">
                       Administrator Invite Code (Security Token)
                     </label>
-                    <div className="relative">
-                      <KeyRound size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. SEC-GOV-2026-X7"
-                        value={adminForm.invite_code}
-                        onChange={(e) => setAdminForm({ ...adminForm, invite_code: e.target.value })}
-                        className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
-                      />
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <KeyRound size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. SEC-GOV-2026-X7"
+                          value={adminForm.invite_code}
+                          onChange={(e) => setAdminForm({ ...adminForm, invite_code: e.target.value })}
+                          className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleRequestInviteCode}
+                        className="shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-700 to-violet-600 hover:from-indigo-800 hover:to-violet-700 text-white text-xs font-bold shadow-xs transition active:scale-95 cursor-pointer"
+                        title="Open Gmail to compose Invite Code request to aisamvedna@gmail.com"
+                      >
+                        <Mail size={14} />
+                        <span>Request Token</span>
+                      </button>
                     </div>
                   </div>
                 </>
