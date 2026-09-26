@@ -49,7 +49,6 @@ const workflow = [
 
 const navLinks = [
   { label: 'Home', href: '#top', active: true },
-  { label: 'About', href: '#about' },
   { label: 'How It Works', href: '#how' },
   { label: 'Features', href: '#features' },
 ]
@@ -105,7 +104,7 @@ const T = {
     heroHeading1: 'Stronger Support',
     heroHeading2: 'for a Fairer',
     heroHeading3: 'Tomorrow',
-    heroDesc: 'Samvedna AI is an empathetic, role-based support and case-triage platform for SC/ST atrocity survivors — designed to help surface distress signals, coordinate counselor response and enable administrative oversight.',
+    heroDesc: 'Samvedna AI is an empathetic, role-based support and case-triage platform for SC/ST atrocity survivors - designed to help surface distress signals, coordinate counselor response and enable administrative oversight.',
     badge1: 'Confidential & Secure', badge2: 'Multi-Lingual Support', badge3: 'Human-Centered AI',
     card1Title: 'For Citizens', card1Text: 'Share your experience, get support, access resources and stay informed in a safe and respectful space.', card1Action: 'Enter Citizen Portal',
     card2Title: 'For Counselors', card2Text: 'Review cases, get AI-driven insights, prioritise alerts and coordinate timely, trauma-informed support.', card2Action: 'Open Counselor Workspace',
@@ -147,7 +146,7 @@ const T = {
     heroHeading1: 'मजबूत समर्थन',
     heroHeading2: 'एक बेहतर',
     heroHeading3: 'कल के लिए',
-    heroDesc: 'संवेदना AI एक सहानुभूतिपूर्ण, भूमिका-आधारित समर्थन और केस-ट्रायज प्लेटफॉर्म है — SC/ST अत्याचार पीड़ितों के लिए डिज़ाइन किया गया है।',
+    heroDesc: 'संवेदना AI एक सहानुभूतिपूर्ण, भूमिका-आधारित समर्थन और केस-ट्रायज प्लेटफॉर्म है - SC/ST अत्याचार पीड़ितों के लिए डिज़ाइन किया गया है।',
     badge1: 'गोपनीय और सुरक्षित', badge2: 'बहुभाषी समर्थन', badge3: 'मानव-केंद्रित AI',
     card1Title: 'नागरिकों के लिए', card1Text: 'अपना अनुभव साझा करें, समर्थन प्राप्त करें, संसाधनों तक पहुंचें और एक सुरक्षित स्थान में सूचित रहें।', card1Action: 'नागरिक पोर्टल खोलें',
     card2Title: 'परामर्शदाताओं के लिए', card2Text: 'केस की समीक्षा करें, AI अंतर्दृष्टि प्राप्त करें, अलर्ट प्राथमिकता दें और समय पर आघात-सूचित समर्थन समन्वित करें।', card2Action: 'परामर्शदाता कार्यक्षेत्र खोलें',
@@ -233,7 +232,6 @@ export default function LandingPage() {
 
   const navLinks = [
     { label: t.navHome, href: '#top', active: true },
-    { label: t.navAbout, href: '#about' },
     { label: t.navHow, href: '#how' },
     { label: t.navFeatures, href: '#features' },
   ]
@@ -250,7 +248,7 @@ export default function LandingPage() {
 
       {/* ═══════════════════ NAVBAR ═══════════════════ */}
       <header className="sticky top-0 z-50 border-b border-violet-100 bg-white/92 shadow-[0_4px_20px_rgba(77,69,188,.06)] backdrop-blur-lg">
-        <nav className="mx-auto flex h-[62px] max-w-[1400px] items-center justify-between gap-4 px-5 lg:px-8">
+        <nav className="mx-auto flex h-15.5 max-w-350 items-center justify-between gap-4 px-5 lg:px-8">
 
           {/* Logo */}
           <a href="#top" className="flex shrink-0 items-center gap-2">
@@ -271,8 +269,7 @@ export default function LandingPage() {
               <a
                 key={l.label}
                 href={l.href}
-                className={`grid h-full place-items-center transition-colors hover:text-violet-700 ${
-                  l.active ? 'border-b-2 border-violet-600 font-bold text-violet-700' : ''
+                className={`grid h-full place-items-center transition-colors hover:text-violet-700 ${l.active ? 'border-b-2 border-violet-600 font-bold text-violet-700' : ''
                 }`}
               >
                 {l.label}
@@ -304,8 +301,7 @@ export default function LandingPage() {
                     <button
                       key={item.id}
                       onClick={() => { setLanguage(item.id); setIsLangOpen(false) }}
-                      className={`w-full text-left px-3.5 py-2 text-[12.5px] flex items-center justify-between hover:bg-violet-50 transition-colors cursor-pointer ${
-                        language === item.id ? 'text-violet-700 font-bold bg-violet-50' : 'text-slate-700'
+                      className={`w-full text-left px-3.5 py-2 text-[12.5px] flex items-center justify-between hover:bg-violet-50 transition-colors cursor-pointer ${language === item.id ? 'text-violet-700 font-bold bg-violet-50' : 'text-slate-700'
                       }`}
                     >
                       <span>{item.label}</span>
@@ -319,7 +315,7 @@ export default function LandingPage() {
             <button
               type="button"
               onClick={() => { setAuthRole('citizen'); setIsAuthOpen(true) }}
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-700 to-violet-600 px-5 py-2.5 text-[13px] font-bold text-white shadow-lg shadow-violet-300/50 transition hover:shadow-violet-400/60 cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full bg-linear-to-r from-indigo-700 to-violet-600 px-5 py-2.5 text-[13px] font-bold text-white shadow-lg shadow-violet-300/50 transition hover:shadow-violet-400/60 cursor-pointer"
             >
               {t.signIn}
             </button>
@@ -355,10 +351,7 @@ export default function LandingPage() {
                     <button
                       key={item.id}
                       onClick={() => setLanguage(item.id)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-colors cursor-pointer ${
-                        language === item.id
-                          ? 'bg-violet-600 text-white border-violet-600'
-                          : 'bg-white text-slate-700 border-violet-200 hover:border-violet-400'
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition-colors cursor-pointer ${language === item.id
                       }`}
                     >
                       {item.shortLabel}
@@ -369,7 +362,7 @@ export default function LandingPage() {
               <button
                 type="button"
                 onClick={() => { setMobileOpen(false); setIsAuthOpen(true) }}
-                className="mt-2 w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-700 to-violet-600 text-white text-xs font-bold shadow-md shadow-violet-300/40"
+                className="mt-2 w-full py-2.5 rounded-xl bg-linear-to-r from-indigo-700 to-violet-600 text-white text-xs font-bold shadow-md shadow-violet-300/40"
               >
                 {t.signIn}
               </button>
@@ -392,25 +385,25 @@ export default function LandingPage() {
           </div>
 
           {/* Soft ambient overlay */}
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 -z-10 h-10 bg-gradient-to-t from-[#fbfbff]/60 to-transparent" />
+          <div className="absolute inset-0 -z-10 bg-linear-to-r from-white/30 via-white/10 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-10 bg-linear-to-t from-[#fbfbff]/60 to-transparent" />
 
-          <div className="mx-auto min-h-[460px] max-w-[1400px] px-6 pt-8 pb-12 lg:min-h-[520px] lg:px-8">
+          <div className="mx-auto min-h-115 max-w-350 px-6 pt-8 pb-12 lg:min-h-130 lg:px-8">
 
             {/* LEFT — copy (sits on top of image with gradient overlay behind) */}
-            <div className="relative z-10 max-w-[560px]">
+            <div className="relative z-10 max-w-140">
 
               {/* Heading */}
               <h1 className="mt-2 text-[36px] sm:text-[46px] xl:text-[52px] font-extrabold leading-[1.3] tracking-tight">
                 {t.heroHeading1}<br />
-                <span className="bg-gradient-to-r from-indigo-700 via-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-indigo-700 via-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
                   {t.heroHeading2}<br />
                   {t.heroHeading3}
                 </span>
               </h1>
 
               {/* Description */}
-              <p className="mt-4 max-w-[500px] text-[15px] leading-[1.55] text-[#3a507f]">
+              <p className="mt-4 max-w-125text-[15px] leading-[1.55] text-[#3a507f]">
                 {t.heroDesc}
               </p>
 
@@ -431,7 +424,7 @@ export default function LandingPage() {
         </section>
 
         {/* ═══════════════════ ROLE CARDS ═══════════════════ */}
-        <section className="mx-auto grid max-w-[1400px] gap-4 px-6 py-4 md:grid-cols-3 lg:px-8">
+        <section className="mx-auto grid max-w-350 gap-4 px-6 py-4 md:grid-cols-3 lg:px-8">
           {[
             {
               icon: UsersRound,
@@ -463,16 +456,16 @@ export default function LandingPage() {
           ].map(({ icon: Icon, title, text: cardText, action, href, tone, imgUrl }) => (
             <article
               key={title}
-              className={`group relative min-h-[175px] overflow-hidden rounded-2xl border border-white/80 p-6 shadow-[0_8px_28px_rgba(69,83,160,.08)] transition hover:shadow-lg ${toneBg[tone]}`}
+              className={`group relative min-h-43.75 overflow-hidden rounded-2xl border border-white/80 p-6 shadow-[0_8px_28px_rgba(69,83,160,.08)] transition hover:shadow-lg ${toneBg[tone]}`}
             >
               <div className="relative z-10 w-[44%] overflow-hidden">
                 <div className="flex items-center gap-2 min-w-0">
                   <div className={`grid size-10 shrink-0 place-items-center rounded-xl ${toneIcon[tone]}`}>
                     <Icon size={20} />
                   </div>
-                  <h2 className="text-[15px] font-extrabold leading-tight break-words">{title}</h2>
+                  <h2 className="text-[15px] font-extrabold leading-tight wrap-break-word">{title}</h2>
                 </div>
-                <p className="mt-3 text-[12.5px] leading-[1.5] text-[#3c507a]">{cardText}</p>
+                <p className="mt-3 text-[12.5px] leading-normal text-[#3c507a]">{cardText}</p>
                 <a
                   href={href}
                   className={`mt-4 inline-flex items-center gap-1.5 text-[12.5px] font-bold ${toneLink[tone]}`}
@@ -494,7 +487,7 @@ export default function LandingPage() {
         </section>
 
         {/* ═══════════════════ HOW IT WORKS ═══════════════════ */}
-        <section id="how" className="mx-auto max-w-[1400px] px-6 pt-2 pb-3 lg:px-8">
+        <section id="how" className="mx-auto max-w-350 px-6 pt-2 pb-3 lg:px-8">
           <div className="rounded-2xl border border-violet-100 bg-white px-6 py-6 shadow-[0_6px_24px_rgba(63,65,150,.06)] lg:px-8">
             <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
 
@@ -508,7 +501,7 @@ export default function LandingPage() {
                   {t.howTitle1}<br />
                   <span className="text-violet-600">{t.howTitle2}</span>
                 </h2>
-                <p className="mt-3 max-w-[240px] text-[12.5px] leading-[1.5] text-[#4a5e8e]">
+                <p className="mt-3 max-w-60 text-[12.5px] leading-normal text-[#4a5e8e]">
                   {t.howSub}
                 </p>
               </div>
@@ -517,7 +510,7 @@ export default function LandingPage() {
               <div className="grid items-center gap-2 sm:grid-cols-5">
                 {workflow.map(({ Icon, title, sub }, i) => (
                   <div key={title} className="relative text-center">
-                    <div className="mx-auto grid size-[52px] place-items-center rounded-full bg-gradient-to-br from-violet-100 to-white text-violet-600 shadow-sm ring-1 ring-violet-100/60">
+                    <div className="mx-auto grid size-13 place-items-center rounded-full bg-linear-to-br from-violet-100 to-white text-violet-600 shadow-sm ring-1 ring-violet-100/60">
                       <Icon size={22} />
                     </div>
                     <h3 className="mt-2.5 whitespace-pre-line text-[11px] font-extrabold leading-[1.15]">
@@ -526,7 +519,7 @@ export default function LandingPage() {
                     <p className="mt-1 text-[10px] text-[#3c5088]">{sub}</p>
                     {i < 4 && (
                       <ArrowRight
-                        className="absolute -right-2.5 top-[18px] hidden text-violet-400 sm:block"
+                        className="absolute -right-2.5 top-4.5 hidden text-violet-400 sm:block"
                         size={16}
                       />
                     )}
@@ -539,7 +532,7 @@ export default function LandingPage() {
 
         {/* ═══════════════════ FEATURES / IMPACT BAR ═══════════════════ */}
         <section id="features" className="mt-2 border-y border-violet-100 bg-white">
-          <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-y-5 px-6 py-5 md:grid-cols-4 lg:px-8">
+          <div className="mx-auto grid max-w-350 grid-cols-2 gap-y-5 px-6 py-5 md:grid-cols-4 lg:px-8">
             {[
               { Icon: ShieldCheck, title: t.impact1, sub: t.impact1s, color: 'text-violet-600' },
               { Icon: Sparkles, title: t.impact2, sub: t.impact2s, color: 'text-violet-600' },
@@ -548,8 +541,7 @@ export default function LandingPage() {
             ].map(({ Icon, title, sub, color }, i) => (
               <div
                 key={title}
-                className={`flex items-center justify-center gap-3.5 ${
-                  i < 3 ? 'md:border-r md:border-violet-100' : ''
+                className={`flex items-center justify-center gap-3.5 ${i < 3 ? 'md:border-r md:border-violet-100' : ''
                 }`}
               >
                 <Icon className={color} size={28} />
@@ -564,8 +556,8 @@ export default function LandingPage() {
       </main>
 
       {/* ═══════════════════ FOOTER ═══════════════════ */}
-      <footer id="resources" className="bg-gradient-to-r from-[#f3f5ff] to-white">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-6 px-6 py-6 text-center md:flex-row md:text-left lg:px-8">
+      <footer id="resources" className="bg-linear-to-r from-[#f3f5ff] to-white">
+        <div className="mx-auto flex max-w-350 flex-col items-center justify-between gap-6 px-6 py-6 text-center md:flex-row md:text-left lg:px-8">
           {/* Ministry */}
           <div className="flex items-center gap-3">
             <Landmark size={40} className="shrink-0 text-slate-700" />
