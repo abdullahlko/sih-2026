@@ -91,8 +91,14 @@ async def register_counselor(
     if result.scalars().first():
         raise HTTPException(status_code=400, detail="Email already registered")
 
+    stmt = select(User).where(User.phone_number == data.phone_number)
+    result = await db.execute(stmt)
+    if result.scalars().first():
+        raise HTTPException(status_code=400, detail="Phone number already registered")
+
     # 2. Create base user
     new_user = User(
+        phone_number=data.phone_number,
         email=data.email,
         hashed_password=get_password_hash(data.password),
         role=UserRole.COUNSELOR
