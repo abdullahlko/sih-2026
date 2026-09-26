@@ -16,7 +16,7 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
-    phone_number = Column(String, unique=True, index=True, nullable=False) # Primary login for victims
+    phone_number = Column(String, unique=True, index=True, nullable=True) # Primary login for victims
     email = Column(String, unique=True, index=True, nullable=True) # Primary login for counselors/admins
     hashed_password = Column(String, nullable=False)
     role = Column(Enum(UserRole), default=UserRole.VICTIM, nullable=False)

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSimulation, SIMULATION_STATES } from '../../context/SimulationContext';
+import { PORTAL_TRANSLATIONS } from '../../context/translations';
 import BentoMetrics from './BentoMetrics';
 import GeographicHeatmap from './GeographicHeatmap';
 import IvrsSmsConsole from './IvrsSmsConsole';
@@ -18,7 +19,8 @@ import {
 } from 'lucide-react';
 
 export default function AdminCommandCenter() {
-  const { simulationState, statePayload } = useSimulation();
+  const { simulationState, statePayload, language } = useSimulation();
+  const t = PORTAL_TRANSLATIONS[language] || PORTAL_TRANSLATIONS.en;
   const isCritical = simulationState !== SIMULATION_STATES.SAFE;
 
   const handleExportAudit = () => {
@@ -37,7 +39,7 @@ export default function AdminCommandCenter() {
           <div>
             <div className="flex items-center gap-2.5">
               <h1 className="text-xl font-heading font-extrabold tracking-tight text-white">
-                MoSJE District Executive Distress Command Center
+                {t.adminTitle}
               </h1>
               <span className="bg-purple-500/20 text-purple-300 font-mono text-[10px] font-bold px-3 py-0.5 rounded-full border border-purple-400/30">
                 DISTRICT: ALWAR (ZONE-1)
@@ -55,7 +57,7 @@ export default function AdminCommandCenter() {
             className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold text-white transition-all shadow-sm active:scale-95 cursor-pointer"
           >
             <Download className="w-4 h-4 text-purple-300" />
-            <span>Export MoSJE Audit</span>
+            <span>{t.exportAudit}</span>
           </button>
 
           <div className={`px-4 py-2 rounded-2xl border text-right font-mono shadow-md ${
@@ -64,7 +66,7 @@ export default function AdminCommandCenter() {
               : 'bg-emerald-950/80 border-emerald-500 text-emerald-300'
           }`}>
             <div className="text-[10px] font-sans font-bold uppercase tracking-wider">
-              {isCritical ? 'Critical SOS Active' : 'System Baseline'}
+              {isCritical ? t.criticalSosActive : t.systemBaseline}
             </div>
             <div className="text-xs font-bold">
               {isCritical ? `${statePayload.adminEmergencyCount} Active Alerts` : 'Zero Unresolved SOS'}
@@ -90,7 +92,7 @@ export default function AdminCommandCenter() {
               <div className="clay-icon w-8 h-8 bg-linear-to-tr from-[#6342eb] to-[#7d54f5] flex items-center justify-center text-white">
                 <Scale className="w-4 h-4" />
               </div>
-              <span>Special Atrocities Court Compliance & Witness Protection SLA</span>
+              <span>{t.slaTitle}</span>
             </h3>
             <p className="text-xs text-purple-900/70 mt-1">
               Audited against Mandated 60-Day Trial Completion & Section 15A Witness Escort Guidelines.
@@ -101,26 +103,26 @@ export default function AdminCommandCenter() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
           
           <div className="p-4 rounded-2xl bg-[#faf8ff] border border-purple-100 space-y-1.5 shadow-2xs">
-            <div className="text-purple-900/70 font-semibold">Average Counselor SLA Response</div>
+            <div className="text-purple-900/70 font-semibold">{t.avgResponseSla}</div>
             <div className="text-2xl font-black font-mono text-slate-900 font-heading">4.8 Minutes</div>
             <div className="text-[11px] text-emerald-600 font-bold flex items-center gap-1.5">
-              <TrendingUp className="w-3.5 h-3.5" /> Target: &lt;15 Minutes (100% compliant)
+              <TrendingUp className="w-3.5 h-3.5" /> {t.targetCompliance}
             </div>
           </div>
 
           <div className="p-4 rounded-2xl bg-[#faf8ff] border border-purple-100 space-y-1.5 shadow-2xs">
-            <div className="text-purple-900/70 font-semibold">Witness Protection Relocations</div>
+            <div className="text-purple-900/70 font-semibold">{t.witnessRelocations}</div>
             <div className="text-2xl font-black font-mono text-slate-900 font-heading">32 Families</div>
             <div className="text-[11px] text-[#6342eb] font-bold">
-              Zero witness hostility retractions
+              {t.zeroRetractions}
             </div>
           </div>
 
           <div className="p-4 rounded-2xl bg-[#faf8ff] border border-purple-100 space-y-1.5 shadow-2xs">
-            <div className="text-purple-900/70 font-semibold">Automated DBT Compensation Sanction</div>
+            <div className="text-purple-900/70 font-semibold">{t.dbtCompensation}</div>
             <div className="text-2xl font-black font-mono text-slate-900 font-heading">100% Direct Bank</div>
             <div className="text-[11px] text-purple-700/80 font-medium">
-              Zero intermediary leakage in Alwar district
+              {t.zeroLeakage}
             </div>
           </div>
 

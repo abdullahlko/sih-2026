@@ -1,11 +1,7 @@
 import React from 'react';
 import { useSimulation, VIEWS } from '../../context/SimulationContext';
 import {
-  PhoneCall,
-  Activity,
-  Users,
-  Stethoscope,
-  Building2
+  PhoneCall
 } from 'lucide-react';
 
 export default function Footer() {
@@ -47,14 +43,14 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Column 2: 24x7 Emergency Helplines (4 Cols) */}
-          <div className="lg:col-span-4 space-y-3.5">
+          {/* Column 2: 24x7 Emergency Helplines (7 Cols) */}
+          <div className="lg:col-span-7 space-y-3.5">
             <div className="flex items-center gap-2 text-xs font-bold text-slate-900 uppercase tracking-wider">
               <PhoneCall className="w-4 h-4 text-rose-500" />
               <span>National 24x7 Crisis Hotlines</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               
               {/* Helpline 1: SC/ST Helpline */}
               <div className="p-3 rounded-2xl bg-[#faf8ff] border border-purple-200/80 shadow-xs hover:border-purple-300 transition-all">
@@ -94,50 +90,6 @@ export default function Footer() {
                 <div className="text-[10px] text-purple-900/60 font-medium">24x7 Immediate Redressal</div>
               </div>
 
-            </div>
-          </div>
-
-          {/* Column 3: Portal Navigation (3 Cols) */}
-          <div className="lg:col-span-3 space-y-3.5">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-900 uppercase tracking-wider">
-              <Activity className="w-4 h-4 text-[#6342eb]" />
-              <span>Portal Navigation</span>
-            </div>
-
-            {/* Quick Portal Switchers */}
-            <div className="space-y-1.5">
-              <button
-                onClick={() => setCurrentView(VIEWS.CITIZEN)}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-purple-50/60 hover:bg-purple-100/70 border border-purple-200/60 text-xs font-semibold text-purple-950 transition-all cursor-pointer text-left"
-              >
-                <span className="flex items-center gap-2">
-                  <Users className="w-3.5 h-3.5 text-[#6342eb]" />
-                  <span>Citizen Portal</span>
-                </span>
-                <span className="text-[10px] text-purple-500 font-mono font-bold">Portal 1</span>
-              </button>
-
-              <button
-                onClick={() => setCurrentView(VIEWS.COUNSELOR)}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-purple-50/60 hover:bg-purple-100/70 border border-purple-200/60 text-xs font-semibold text-purple-950 transition-all cursor-pointer text-left"
-              >
-                <span className="flex items-center gap-2">
-                  <Stethoscope className="w-3.5 h-3.5 text-[#6342eb]" />
-                  <span>Counselor Workspace</span>
-                </span>
-                <span className="text-[10px] text-purple-500 font-mono font-bold">Portal 2</span>
-              </button>
-
-              <button
-                onClick={() => setCurrentView(VIEWS.ADMIN)}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-purple-50/60 hover:bg-purple-100/70 border border-purple-200/60 text-xs font-semibold text-purple-950 transition-all cursor-pointer text-left"
-              >
-                <span className="flex items-center gap-2">
-                  <Building2 className="w-3.5 h-3.5 text-[#6342eb]" />
-                  <span>Admin Command Center</span>
-                </span>
-                <span className="text-[10px] text-purple-500 font-mono font-bold">Portal 3</span>
-              </button>
             </div>
           </div>
 
