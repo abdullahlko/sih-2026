@@ -337,7 +337,7 @@ ${senderName}`;
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  NHAA / FIR Case ID (केस संख्या / यदि उपलब्ध हो)
+                  NHAA / FIR Case ID (केस संख्या)
                 </label>
                 <div className="relative">
                   <FileText size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -578,7 +578,7 @@ ${senderName}`;
                       <button
                         type="button"
                         onClick={handleRequestInviteCode}
-                        className="shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-700 to-violet-600 hover:from-indigo-800 hover:to-violet-700 text-white text-xs font-bold shadow-xs transition active:scale-95 cursor-pointer"
+                        className="shrink-0 flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-linear-to-r from-indigo-700 to-violet-600 hover:from-indigo-800 hover:to-violet-700 text-white text-xs font-bold shadow-xs transition active:scale-95 cursor-pointer"
                         title="Open Gmail to compose Invite Code request to aisamvedna@gmail.com"
                       >
                         <Mail size={14} />
@@ -627,7 +627,7 @@ ${senderName}`;
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full mt-2 flex items-center justify-center gap-2 py-3 px-5 rounded-2xl bg-gradient-to-r from-indigo-700 via-violet-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-violet-300/60 hover:shadow-violet-400/80 transition active:scale-[0.99] disabled:opacity-60 cursor-pointer"
+            className="w-full mt-2 flex items-center justify-center gap-2 py-3 px-5 rounded-2xl bg-linear-to-r from-indigo-700 via-violet-600 to-fuchsia-600 text-white text-sm font-bold shadow-lg shadow-violet-300/60 hover:shadow-violet-400/80 transition active:scale-[0.99] disabled:opacity-60 cursor-pointer"
           >
             {isSubmitting ? (
               <span>Authenticating...</span>

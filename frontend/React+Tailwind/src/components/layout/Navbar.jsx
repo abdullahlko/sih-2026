@@ -285,7 +285,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 pl-2 border-l border-purple-200/50 hover:opacity-90 transition cursor-pointer text-left"
                 title="View active profile & role"
               >
-                <div className={`w-8.5 h-8.5 rounded-2xl bg-gradient-to-tr ${profileDetails.avatarBg} text-white flex items-center justify-center font-bold text-xs shadow-sm`}>
+                <div className={`w-8.5 h-8.5 rounded-2xl bg-linear-to-tr ${profileDetails.avatarBg} text-white flex items-center justify-center font-bold text-xs shadow-sm`}>
                   {profileDetails.initials}
                 </div>
                 <div className="hidden xl:block">
@@ -304,7 +304,7 @@ export default function Navbar() {
               {isProfileOpen && (
                 <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white/95 backdrop-blur-xl border border-purple-200/90 shadow-2xl p-3.5 z-50 animate-spring-pop">
                   <div className="flex items-center gap-2.5 pb-2.5 border-b border-purple-100">
-                    <div className={`w-9 h-9 rounded-2xl bg-gradient-to-tr ${profileDetails.avatarBg} text-white flex items-center justify-center font-bold text-xs shadow-sm shrink-0`}>
+                    <div className={`w-9 h-9 rounded-2xl bg-linear-to-tr ${profileDetails.avatarBg} text-white flex items-center justify-center font-bold text-xs shadow-sm shrink-0`}>
                       {profileDetails.initials}
                     </div>
                     <div className="overflow-hidden">
