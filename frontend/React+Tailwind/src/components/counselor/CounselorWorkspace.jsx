@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSimulation, SIMULATION_STATES } from '../../context/SimulationContext';
+import { PORTAL_TRANSLATIONS } from '../../context/translations';
 import CaseQueueSidebar, { MOCK_CASES } from './CaseQueueSidebar';
 import DistressGauge from './DistressGauge';
 import NyayaExplainableAI from './NyayaExplainableAI';
@@ -19,7 +20,8 @@ import {
 } from 'lucide-react';
 
 export default function CounselorWorkspace() {
-  const { simulationState, statePayload } = useSimulation();
+  const { simulationState, statePayload, language } = useSimulation();
+  const t = PORTAL_TRANSLATIONS[language] || PORTAL_TRANSLATIONS.en;
   const [selectedCaseId, setSelectedCaseId] = useState('CASE-01');
 
   // Auto-switch selected case based on simulation state
@@ -46,7 +48,7 @@ export default function CounselorWorkspace() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-heading font-extrabold text-slate-900">
-                Psychological Triage & Clinical Intervention Workspace
+                {t.counselorTitle}
               </h1>
             </div>
             <p className="text-xs text-purple-900/70 mt-0.5">
@@ -57,8 +59,8 @@ export default function CounselorWorkspace() {
 
         <div className="flex items-center gap-3">
           <div className="px-4 py-2 rounded-2xl bg-[#faf8ff] border border-purple-200/80 text-right shadow-2xs">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-purple-400 font-mono">District Focus</div>
-            <div className="text-xs font-bold text-slate-900">Alwar & Mewat Region</div>
+            <div className="text-[10px] font-bold uppercase tracking-wider text-purple-400 font-mono">{t.districtFocusLabel}</div>
+            <div className="text-xs font-bold text-slate-900">{t.districtRegion}</div>
           </div>
           <div className={`px-4 py-2 rounded-2xl border text-right font-mono shadow-2xs ${
             isCritical 
@@ -66,7 +68,7 @@ export default function CounselorWorkspace() {
               : 'bg-emerald-50 border-emerald-300 text-emerald-800'
           }`}>
             <div className="text-[10px] font-sans font-bold uppercase tracking-wider">
-              {isCritical ? 'Active SOS Priority' : 'Triage Queue'}
+              {isCritical ? t.activeSos : t.triageQueue}
             </div>
             <div className="text-xs font-bold">
               {isCritical ? '1 Case Elevated' : '5 Cases Monitored'}
@@ -120,15 +122,15 @@ export default function CounselorWorkspace() {
             {/* Sub Meta Info */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
               <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 shadow-2xs">
-                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">Trial Stage</span>
+                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">{t.trialStageLabel}</span>
                 <span className="font-bold text-slate-900 mt-0.5 block">{selectedCase.stage}</span>
               </div>
               <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 shadow-2xs">
-                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">Assigned DLSA Advocate</span>
+                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">{t.assignedAdvocateLabel}</span>
                 <span className="font-bold text-slate-900 mt-0.5 block">Adv. R. K. Meena</span>
               </div>
               <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 shadow-2xs col-span-2 sm:col-span-1">
-                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">Rehabilitation Status</span>
+                <span className="text-[10px] text-purple-400 block font-bold uppercase font-mono">{t.rehabStatusLabel}</span>
                 <span className="font-bold text-emerald-700 mt-0.5 block">₹1.25L Disbursed</span>
               </div>
             </div>

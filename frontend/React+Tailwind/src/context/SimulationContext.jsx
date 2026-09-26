@@ -66,6 +66,44 @@ export function SimulationProvider({ children }) {
   const [isDpdpOpen, setIsDpdpOpen] = useState(false);
   const [lastTriggerTime, setLastTriggerTime] = useState(new Date().toLocaleTimeString());
 
+  // Persistent Authentication & Role State
+  const [userRole, setUserRole] = useState(() => {
+    try {
+      return localStorage.getItem('samvedna_role') || null;
+    } catch {
+      return null;
+    }
+  });
+
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('samvedna_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const loginUser = useCallback((role, userData) => {
+    setUserRole(role);
+    setCurrentUser(userData);
+    setCurrentView(role);
+    try {
+      localStorage.setItem('samvedna_role', role);
+      localStorage.setItem('samvedna_user', JSON.stringify(userData));
+    } catch {}
+  }, []);
+
+  const logoutUser = useCallback(() => {
+    setUserRole(null);
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem('samvedna_role');
+      localStorage.removeItem('samvedna_user');
+    } catch {}
+    window.location.hash = '';
+  }, []);
+
   // Handle switching simulation state with timestamp & sound
   const triggerSimulationState = useCallback((newState) => {
     setSimulationState(newState);
@@ -84,12 +122,18 @@ export function SimulationProvider({ children }) {
       const key = e.key.toLowerCase();
       if (key === '1') {
         setCurrentView(VIEWS.CITIZEN);
+        setUserRole(VIEWS.CITIZEN);
+        window.location.hash = '#citizen';
         playHapticAudioCue('chime');
       } else if (key === '2') {
         setCurrentView(VIEWS.COUNSELOR);
+        setUserRole(VIEWS.COUNSELOR);
+        window.location.hash = '#counselor';
         playHapticAudioCue('chime');
       } else if (key === '3') {
         setCurrentView(VIEWS.ADMIN);
+        setUserRole(VIEWS.ADMIN);
+        window.location.hash = '#admin';
         playHapticAudioCue('chime');
       } else if (key === 's') {
         triggerSimulationState(SIMULATION_STATES.SAFE);
@@ -196,7 +240,13 @@ export function SimulationProvider({ children }) {
         isDpdpOpen,
         setIsDpdpOpen,
         lastTriggerTime,
-        statePayload
+        statePayload,
+        userRole,
+        setUserRole,
+        currentUser,
+        setCurrentUser,
+        loginUser,
+        logoutUser
       }}
     >
       {children}

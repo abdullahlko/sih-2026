@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSimulation, SIMULATION_STATES } from '../../context/SimulationContext';
+import { PORTAL_TRANSLATIONS } from '../../context/translations';
 import HealingHero from './HealingHero';
 import SwarajChatbot from './SwarajChatbot';
 import AcousticPanicHook from './AcousticPanicHook';
@@ -19,7 +20,8 @@ import {
 } from 'lucide-react';
 
 export default function CitizenPortal() {
-  const { simulationState, statePayload } = useSimulation();
+  const { simulationState, statePayload, language } = useSimulation();
+  const t = PORTAL_TRANSLATIONS[language] || PORTAL_TRANSLATIONS.en;
   const isCritical = simulationState !== SIMULATION_STATES.SAFE;
 
   return (
@@ -36,7 +38,7 @@ export default function CitizenPortal() {
           <div className="flex items-center justify-between px-1">
             <h2 className="text-xs font-bold uppercase tracking-wider text-purple-900/70 flex items-center gap-2 font-heading">
               <span className="w-2.5 h-2.5 rounded-full bg-[#6342eb] animate-pulse"></span>
-              Interactive Psychological & Legal Assistant
+              {t.assistantTitle}
             </h2>
           </div>
           <SwarajChatbot />
@@ -50,7 +52,7 @@ export default function CitizenPortal() {
             <div className="flex items-center justify-between px-1 mb-2">
               <h2 className="text-xs font-bold uppercase tracking-wider text-purple-900/70 flex items-center gap-2 font-heading">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#704fe6] animate-pulse"></span>
-                Acoustic Voice Stress Hook
+                {t.acousticTitle}
               </h2>
             </div>
             <AcousticPanicHook />
@@ -65,7 +67,7 @@ export default function CitizenPortal() {
                 </div>
                 <div>
                   <h3 className="text-sm font-bold font-heading text-slate-900">
-                    Your Case & Statutory Entitlements
+                    {t.entitlementsTitle}
                   </h3>
                   <div className="text-[11px] text-purple-700/80 font-mono font-medium">
                     {statePayload.firNumber} • {statePayload.district}
@@ -76,19 +78,19 @@ export default function CitizenPortal() {
 
             <div className="space-y-2.5 text-xs">
               <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 flex items-center justify-between shadow-2xs">
-                <span className="text-slate-600 font-medium">Rehabilitation Grant (DBT)</span>
+                <span className="text-slate-600 font-medium">{t.rehabGrant}</span>
                 <span className="font-bold text-[#5932ea] font-mono bg-purple-100/70 px-2.5 py-0.5 rounded-full border border-purple-200">
                   ₹1,25,000 Sanctioned
                 </span>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 flex items-center justify-between shadow-2xs">
-                <span className="text-slate-600 font-medium">Appointed Legal Advocate</span>
+                <span className="text-slate-600 font-medium">{t.appointedAdvocate}</span>
                 <span className="font-bold text-slate-900">Adv. R. K. Meena (DLSA)</span>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-[#faf8ff] border border-purple-100 flex items-center justify-between shadow-2xs">
-                <span className="text-slate-600 font-medium">Special Atrocities Court Hearing</span>
+                <span className="text-slate-600 font-medium">{t.courtHearing}</span>
                 <span className="font-bold text-[#6342eb] bg-purple-100/70 px-2.5 py-0.5 rounded-full border border-purple-200">
                   14 Sept 2026 (Pre-Trial)
                 </span>
@@ -96,12 +98,12 @@ export default function CitizenPortal() {
             </div>
 
             <div className="pt-3 border-t border-purple-100 flex items-center justify-between text-xs">
-              <span className="text-slate-500 font-medium">Need Witness Escort?</span>
+              <span className="text-slate-500 font-medium">{t.needEscort}</span>
               <button 
                 onClick={() => alert("Witness protection request dispatched to District Superintendent of Police (SP) office.")}
                 className="font-bold text-[#6342eb] hover:text-[#4f2bd6] flex items-center gap-1 cursor-pointer transition-colors active:scale-95"
               >
-                <span>Request Police Escort</span>
+                <span>{t.requestEscort}</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>

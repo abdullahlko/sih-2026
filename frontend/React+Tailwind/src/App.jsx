@@ -21,7 +21,9 @@ function MainAppShell() {
     statePayload,
     setCurrentView,
     isDpdpOpen,
-    setIsDpdpOpen
+    setIsDpdpOpen,
+    userRole,
+    setUserRole
   } = useSimulation();
   const isCritical = simulationState !== SIMULATION_STATES.SAFE;
 
@@ -34,6 +36,7 @@ function MainAppShell() {
       const view = hashRoutes[hash];
       if (view) {
         setCurrentView(view);
+        setUserRole(view);
         setShowLanding(false);
       } else {
         setShowLanding(true);
@@ -42,7 +45,7 @@ function MainAppShell() {
     syncRoute();
     window.addEventListener('hashchange', syncRoute);
     return () => window.removeEventListener('hashchange', syncRoute);
-  }, [setCurrentView]);
+  }, [setCurrentView, setUserRole]);
 
   /* ── If on landing, render the new landing page ── */
   if (showLanding) return <LandingPage />;
@@ -84,7 +87,7 @@ function MainAppShell() {
               <span className="font-mono text-white/90 text-[11px] hidden md:inline px-2.5 py-0.5 rounded-full bg-black/20">
                 Distress: <strong>{statePayload.distressScore}%</strong> | Jitter: <strong>{statePayload.voiceJitter}</strong>
               </span>
-              {currentView !== VIEWS.COUNSELOR && (
+              {currentView !== VIEWS.COUNSELOR && (userRole === VIEWS.COUNSELOR || userRole === VIEWS.ADMIN) && (
                 <button
                   onClick={() => setCurrentView(VIEWS.COUNSELOR)}
                   className="px-3.5 py-1 rounded-xl bg-white text-purple-950 text-xs font-bold hover:bg-purple-50 transition-all shadow-md active:scale-95 flex items-center gap-1.5 cursor-pointer"
