@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SimulationProvider, useSimulation, VIEWS, SIMULATION_STATES } from './context/SimulationContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -8,7 +8,11 @@ import CitizenPortal from './components/citizen/CitizenPortal';
 import CounselorWorkspace from './components/counselor/CounselorWorkspace';
 import AdminCommandCenter from './components/admin/AdminCommandCenter';
 import InteractiveBackground from './components/layout/InteractiveBackground';
+import LandingPage from './pages/LandingPage';
 import { AlertOctagon, PhoneCall, ShieldAlert, ArrowRight, ShieldCheck, Sparkles, Heart } from 'lucide-react';
+
+/* Hash-based routes that map to the existing app views */
+const hashRoutes = { citizen: VIEWS.CITIZEN, counselor: VIEWS.COUNSELOR, admin: VIEWS.ADMIN };
 
 function MainAppShell() {
   const {
@@ -21,6 +25,29 @@ function MainAppShell() {
   } = useSimulation();
   const isCritical = simulationState !== SIMULATION_STATES.SAFE;
 
+  /* ── routing: show landing when hash is empty, show existing app for #citizen/#counselor/#admin ── */
+  const [showLanding, setShowLanding] = useState(() => !hashRoutes[window.location.hash.slice(1)]);
+
+  useEffect(() => {
+    const syncRoute = () => {
+      const hash = window.location.hash.slice(1);
+      const view = hashRoutes[hash];
+      if (view) {
+        setCurrentView(view);
+        setShowLanding(false);
+      } else {
+        setShowLanding(true);
+      }
+    };
+    syncRoute();
+    window.addEventListener('hashchange', syncRoute);
+    return () => window.removeEventListener('hashchange', syncRoute);
+  }, [setCurrentView]);
+
+  /* ── If on landing, render the new landing page ── */
+  if (showLanding) return <LandingPage />;
+
+  /* ── Otherwise, render the original existing app shell (image 1) ── */
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-[#f7f5ff] text-[#241c40] antialiased selection:bg-purple-500 selection:text-white">
 
