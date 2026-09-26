@@ -28,6 +28,7 @@ class VictimRegister(BaseModel):
     preferred_language: str = "hi"
 
 class CounselorRegister(BaseModel):
+    phone_number: str
     email: str
     password: str
     full_name: str
