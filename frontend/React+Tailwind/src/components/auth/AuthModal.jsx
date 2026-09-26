@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSimulation } from '../../context/SimulationContext';
 import {
   X,
   User,
@@ -20,6 +21,7 @@ import {
 } from 'lucide-react';
 
 export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', initialMode = 'signin' }) {
+  const { loginUser } = useSimulation();
   const [mode, setMode] = useState(initialMode); // 'signin' | 'register'
   const [role, setRole] = useState(initialRole); // 'citizen' | 'counselor' | 'admin'
   const [showPassword, setShowPassword] = useState(false);
@@ -44,11 +46,13 @@ export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', in
     specialization: 'Trauma & Psychological Relief'
   });
 
-  // Form State for Admin
+  // Form State for Admin (Schema: AdminRegister)
   const [adminForm, setAdminForm] = useState({
-    admin_id: '',
+    full_name: '',
+    email: '',
     password: '',
-    security_key: ''
+    district: '',
+    invite_code: ''
   });
 
   if (!isOpen) return null;
@@ -57,11 +61,45 @@ export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', in
     e.preventDefault();
     setIsSubmitting(true);
 
+    let activeUserData = null;
+    let displayName = 'User';
+
+    if (role === 'citizen') {
+      displayName = victimForm.full_name || 'Kailash Chand Verma';
+      activeUserData = {
+        role: 'citizen',
+        full_name: displayName,
+        phone_number: victimForm.phone_number || '+91 98290 12345',
+        district: 'Alwar, Rajasthan',
+        nhaa_case_id: victimForm.nhaa_case_id || 'NHAA/2026/RJ-ALW/0429',
+        preferred_language: victimForm.preferred_language || 'hi'
+      };
+    } else if (role === 'counselor') {
+      displayName = counselorForm.full_name || 'Dr. Anita Sharma';
+      activeUserData = {
+        role: 'counselor',
+        full_name: displayName,
+        email: counselorForm.email || 'anita.sharma@samvedna.gov.in',
+        district: counselorForm.district || 'Alwar, Rajasthan',
+        specialization: counselorForm.specialization || 'Trauma & Psychological Relief'
+      };
+    } else {
+      displayName = adminForm.full_name || 'Rajesh Meena, IAS';
+      activeUserData = {
+        role: 'admin',
+        full_name: displayName,
+        email: adminForm.email || 'admin.alwar@samvedna.gov.in',
+        district: adminForm.district || 'Alwar, Rajasthan',
+        invite_code: adminForm.invite_code || 'SEC-GOV-2026-X7'
+      };
+    }
+
     setTimeout(() => {
       setIsSubmitting(false);
+      loginUser(role, activeUserData);
       setSuccessMessage(
         mode === 'register'
-          ? `Welcome ${role === 'citizen' ? victimForm.full_name || 'Citizen' : counselorForm.full_name || 'Counselor'}! Account registered successfully.`
+          ? `Welcome ${displayName}! Account registered successfully.`
           : 'Authentication successful. Redirecting to workspace...'
       );
 
@@ -101,9 +139,11 @@ export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', in
     } else {
       setRole('admin');
       setAdminForm({
-        admin_id: 'ADMIN-RJ-ALW-01',
+        full_name: 'Rajesh Meena, IAS',
+        email: 'admin.alwar@samvedna.gov.in',
         password: '••••••••',
-        security_key: 'SEC-GOV-2026-X7'
+        district: 'Alwar, Rajasthan',
+        invite_code: 'SEC-GOV-2026-X7'
       });
     }
   };
@@ -431,40 +471,103 @@ export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', in
             </>
           )}
 
-          {/* ══════════════ 3. ADMIN FIELDS ══════════════ */}
+          {/* ══════════════ 3. ADMIN FIELDS (Schema: AdminRegister) ══════════════ */}
           {role === 'admin' && (
             <>
+              {mode === 'register' && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Administrator Full Name
+                  </label>
+                  <div className="relative">
+                    <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Rajesh Meena, IAS"
+                      value={adminForm.full_name}
+                      onChange={(e) => setAdminForm({ ...adminForm, full_name: e.target.value })}
+                      className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
+                    />
+                  </div>
+                </div>
+              )}
+
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  District Officer / Admin Badge ID
+                  Institutional Email Address
                 </label>
                 <div className="relative">
-                  <Building2 size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
-                    type="text"
+                    type="email"
                     required
-                    placeholder="e.g. ADMIN-RJ-ALW-01"
-                    value={adminForm.admin_id}
-                    onChange={(e) => setAdminForm({ ...adminForm, admin_id: e.target.value })}
+                    placeholder="name@samvedna.gov.in"
+                    value={adminForm.email}
+                    onChange={(e) => setAdminForm({ ...adminForm, email: e.target.value })}
                     className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
                   />
                 </div>
               </div>
 
+              {mode === 'register' && (
+                <>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      District Jurisdiction (Optional)
+                    </label>
+                    <div className="relative">
+                      <MapPin size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="text"
+                        placeholder="e.g. Alwar, Rajasthan"
+                        value={adminForm.district}
+                        onChange={(e) => setAdminForm({ ...adminForm, district: e.target.value })}
+                        className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Administrator Invite Code (Security Token)
+                    </label>
+                    <div className="relative">
+                      <KeyRound size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. SEC-GOV-2026-X7"
+                        value={adminForm.invite_code}
+                        onChange={(e) => setAdminForm({ ...adminForm, invite_code: e.target.value })}
+                        className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  Master Security Key
+                  Administrator Password
                 </label>
                 <div className="relative">
-                  <KeyRound size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Lock size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     required
-                    placeholder="SEC-GOV-XXXX-XX"
-                    value={adminForm.security_key}
-                    onChange={(e) => setAdminForm({ ...adminForm, security_key: e.target.value })}
-                    className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
+                    placeholder="Enter confidential password"
+                    value={adminForm.password}
+                    onChange={(e) => setAdminForm({ ...adminForm, password: e.target.value })}
+                    className="w-full pl-10 pr-10 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
                 </div>
               </div>
             </>

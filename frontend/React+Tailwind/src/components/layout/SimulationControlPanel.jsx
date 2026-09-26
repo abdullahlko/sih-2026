@@ -182,7 +182,10 @@ export default function SimulationControlPanel() {
               </span>
               <div className="flex items-center gap-1.5">
                 <button
-                  onClick={() => setCurrentView(VIEWS.CITIZEN)}
+                  onClick={() => {
+                    setCurrentView(VIEWS.CITIZEN);
+                    window.location.hash = '#citizen';
+                  }}
                   className={`px-2.5 py-1 rounded-xl text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1 shadow-2xs ${
                     currentView === VIEWS.CITIZEN 
                       ? 'bg-[#6342eb] text-white' 
@@ -194,7 +197,10 @@ export default function SimulationControlPanel() {
                   <span className="text-[9px] font-mono opacity-70">1</span>
                 </button>
                 <button
-                  onClick={() => setCurrentView(VIEWS.COUNSELOR)}
+                  onClick={() => {
+                    setCurrentView(VIEWS.COUNSELOR);
+                    window.location.hash = '#counselor';
+                  }}
                   className={`px-2.5 py-1 rounded-xl text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1 shadow-2xs ${
                     currentView === VIEWS.COUNSELOR 
                       ? 'bg-[#6342eb] text-white' 
@@ -206,7 +212,10 @@ export default function SimulationControlPanel() {
                   <span className="text-[9px] font-mono opacity-70">2</span>
                 </button>
                 <button
-                  onClick={() => setCurrentView(VIEWS.ADMIN)}
+                  onClick={() => {
+                    setCurrentView(VIEWS.ADMIN);
+                    window.location.hash = '#admin';
+                  }}
                   className={`px-2.5 py-1 rounded-xl text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1 shadow-2xs ${
                     currentView === VIEWS.ADMIN 
                       ? 'bg-[#6342eb] text-white' 

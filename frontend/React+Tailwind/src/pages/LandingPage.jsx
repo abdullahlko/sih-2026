@@ -51,10 +51,6 @@ const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'How It Works', href: '#how' },
   { label: 'Features', href: '#features' },
-  { label: 'For Citizens', href: '#citizen' },
-  { label: 'For Counselors', href: '#counselor' },
-  { label: 'For Administrators', href: '#admin' },
-  { label: 'Resources', href: '#resources' },
 ]
 
 const impactItems = [
@@ -227,14 +223,11 @@ export default function LandingPage() {
 
             {/* LEFT — copy (sits on top of image with gradient overlay behind) */}
             <div className="relative z-10 max-w-[560px]">
-              {/* MoSJE badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/90 px-3.5 py-2 text-[11px] font-bold text-[#1e3058] shadow-sm backdrop-blur-sm">
-                <Landmark size={15} className="text-slate-600" />
-                An Initiative by MoSJE, Government of India
-              </div>
+
+
 
               {/* Heading */}
-              <h1 className="mt-6 text-[40px] font-extrabold leading-[1.02] tracking-[-.04em] sm:text-[52px] xl:text-[60px]">
+              <h1 className="mt-2 text-[40px] font-extrabold leading-[1.02] tracking-[-.04em] sm:text-[52px] xl:text-[60px]">
                 Stronger Support<br />
                 <span className="bg-gradient-to-r from-indigo-700 via-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
                   for a Fairer Tomorrow
@@ -249,18 +242,8 @@ export default function LandingPage() {
                 administrative oversight.
               </p>
 
-              {/* CTA button */}
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href="#citizen"
-                  className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-indigo-700 to-violet-600 px-7 py-3.5 text-[14px] font-bold text-white shadow-lg shadow-violet-300/60 transition hover:shadow-xl hover:shadow-violet-400/50"
-                >
-                  Get Support Now <ArrowRight size={18} />
-                </a>
-              </div>
-
               {/* Trust badges */}
-              <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2 text-[12px] font-medium text-[#1e3058]">
+              <div className="mt-20 flex flex-wrap gap-x-7 gap-y-2 text-[12px] font-medium text-[#1e3058]">
                 <span className="flex items-center gap-2">
                   <ShieldCheck size={18} className="text-violet-600" /> Confidential &amp; Secure
                 </span>
@@ -282,24 +265,24 @@ export default function LandingPage() {
               key={title}
               className={`group relative min-h-[175px] overflow-hidden rounded-2xl border border-white/80 p-6 shadow-[0_8px_28px_rgba(69,83,160,.08)] transition hover:shadow-lg ${toneBg[tone]}`}
             >
-              <div className="relative z-10 max-w-[62%]">
-                <div className="flex items-center gap-3">
-                  <div className={`grid size-12 shrink-0 place-items-center rounded-xl ${toneIcon[tone]}`}>
-                    <Icon size={24} />
+              <div className="relative z-10 w-[44%] overflow-hidden">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className={`grid size-10 shrink-0 place-items-center rounded-xl ${toneIcon[tone]}`}>
+                    <Icon size={20} />
                   </div>
-                  <h2 className="text-[17px] font-extrabold leading-tight">{title}</h2>
+                  <h2 className="text-[15px] font-extrabold leading-tight break-words">{title}</h2>
                 </div>
                 <p className="mt-3 text-[12.5px] leading-[1.5] text-[#3c507a]">{text}</p>
                 <a
                   href={href}
-                  className={`mt-4 inline-flex items-center gap-2 text-[12.5px] font-bold transition hover:gap-3 ${toneLink[tone]}`}
+                  className={`mt-4 inline-flex items-center gap-1.5 text-[12.5px] font-bold ${toneLink[tone]}`}
                 >
-                  {action} <ArrowRight size={15} />
+                  <span>{action}</span> <ArrowRight size={14} className="shrink-0" />
                 </a>
               </div>
 
               {/* Local card image */}
-              <div className="absolute inset-y-0 right-0 w-[54%] overflow-hidden pointer-events-none">
+              <div className="absolute inset-y-0 right-0 w-[52%] overflow-hidden pointer-events-none">
                 <img
                   src={imgUrl}
                   alt={title}
@@ -392,16 +375,11 @@ export default function LandingPage() {
             &ldquo;Justice is not a privilege. It is a right.&rdquo;
           </p>
 
-          {/* Viksit Bharat */}
-          <div className="flex items-center gap-3">
-            <span className="text-3xl">🇮🇳</span>
-            <b className="text-[13px] leading-[1.3]">
-              Viksit Bharat<br />Swasth Manas
-            </b>
-            <span className="ml-2 border-l border-violet-200 pl-3 text-[11px] leading-[1.4] text-[#4c5a93]">
-              For People<br />For Support<br />For a Brighter Tomorrow
-            </span>
-          </div>
+
+          <span className="ml-2 border-l border-violet-200 pl-3 text-[11px] leading-[1.4] text-[#4c5a93]">
+            For People<br />For Support<br />For a Brighter Tomorrow
+          </span>
+
         </div>
       </footer>
     </div>
