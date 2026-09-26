@@ -11,3 +11,8 @@ backend/__pycache__/
 
 # Frontend
 docs/SIH_JURY_PRESENTATION_WALKTHROUGH.md
+
+brag-output/
+skills-lock.json
+.agents
+brag-output-2026-09-26-151900
