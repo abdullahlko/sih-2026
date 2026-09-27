@@ -114,6 +114,8 @@ const T = {
     impact2: 'Data-Driven Insights', impact2s: 'For Informed Action',
     impact3: 'Multi-Lingual & Accessible', impact3s: 'Across Regions',
     impact4: 'A More Inclusive India', impact4s: 'Built on Dignity and Justice',
+    videoTitle: 'See how support comes together',
+    videoSub: 'A closer look at how Samvedna AI helps connect a citizen’s voice with timely, coordinated care.',
     footerQuote: '"Justice is not a privilege. It is a right."',
     forPeople: 'For People', forSupport: 'For Support', forBrighter: 'For a Brighter Tomorrow',
   },
@@ -135,6 +137,8 @@ const T = {
     impact2: 'Data-Driven Insights', impact2s: 'Informed Action Ke Liye',
     impact3: 'Multi-Bhasha & Accessible', impact3s: 'Poore Desh Mein',
     impact4: 'Ek Aur Inclusive India', impact4s: 'Dignity Aur Justice Par Aadharit',
+    videoTitle: 'Dekhein support kaise saath aata hai',
+    videoSub: 'Samvedna AI kaise citizen ki awaaz ko samay par, coordinated support se jodta hai—ek nazdeeki nazar.',
     footerQuote: '"Nyay ek privilege nahin hai. Yeh ek adhikar hai."',
     forPeople: 'Logo Ke Liye', forSupport: 'Support Ke Liye', forBrighter: 'Ek Ujjwal Kal Ke Liye',
   },
@@ -156,6 +160,8 @@ const T = {
     impact2: 'डेटा-संचालित अंतर्दृष्टि', impact2s: 'सूचित कार्रवाई के लिए',
     impact3: 'बहुभाषी और सुलभ', impact3s: 'पूरे क्षेत्र में',
     impact4: 'एक अधिक समावेशी भारत', impact4s: 'गरिमा और न्याय पर आधारित',
+    videoTitle: 'देखें, सहयोग कैसे साथ आता है',
+    videoSub: 'जानें कि संवेदना AI नागरिकों की आवाज़ को समय पर और समन्वित सहायता से कैसे जोड़ता है।',
     footerQuote: '"न्याय कोई विशेषाधिकार नहीं है। यह एक अधिकार है।"',
     forPeople: 'लोगों के लिए', forSupport: 'समर्थन के लिए', forBrighter: 'एक उज्जवल कल के लिए',
   },
@@ -177,6 +183,8 @@ const T = {
     impact2: 'தரவு-இயக்கப்பட்ட நுண்ணறிவு', impact2s: 'தகவலறிந்த நடவடிக்கைக்கு',
     impact3: 'பன்மொழி & அணுகக்கூடியது', impact3s: 'பல பிராந்தியங்களில்',
     impact4: 'மேலும் உள்ளடங்கிய இந்தியா', impact4s: 'கண்ணியம் மற்றும் நீதியில் கட்டப்பட்டது',
+    videoTitle: 'ஆதரவு எவ்வாறு ஒன்றிணைகிறது என்பதைப் பாருங்கள்',
+    videoSub: 'குடிமக்களின் குரலை சரியான நேரத்தில் ஒருங்கிணைந்த ஆதரவுடன் சம்வேதனா AI எவ்வாறு இணைக்கிறது என்பதை அறியுங்கள்.',
     footerQuote: '"நீதி ஒரு சலுகை அல்ல. இது ஒரு உரிமை."',
     forPeople: 'மக்களுக்கு', forSupport: 'ஆதரவுக்கு', forBrighter: 'ஒரு பிரகாசமான நாளைக்கு',
   },
@@ -198,6 +206,8 @@ const T = {
     impact2: 'डेटा-चालित अंतर्दृष्टी', impact2s: 'माहितीपूर्ण कृतीसाठी',
     impact3: 'बहुभाषी आणि सुलभ', impact3s: 'सर्व प्रदेशांमध्ये',
     impact4: 'अधिक सर्वसमावेशक भारत', impact4s: 'प्रतिष्ठा आणि न्यायावर आधारित',
+    videoTitle: 'आधार कसा एकत्र येतो ते पाहा',
+    videoSub: 'संवेदना AI नागरिकांचा आवाज वेळेवर आणि समन्वित मदतीशी कसा जोडते, याची ओळख करून घ्या.',
     footerQuote: '"न्याय हा विशेषाधिकार नाही. तो एक हक्क आहे."',
     forPeople: 'लोकांसाठी', forSupport: 'समर्थनासाठी', forBrighter: 'उज्ज्वल उद्यासाठी',
   },
@@ -554,6 +564,28 @@ export default function LandingPage() {
           </div>
         </section>
       </main>
+
+      {/* ═══════════════════ CLOSING VIDEO ═══════════════════ */}
+      <section aria-label="Samvedna AI introduction" className="bg-[#fbfbff] px-6 py-7 lg:px-8 lg:py-8">
+        <div className="mx-auto max-w-210">
+          <div className="mb-5 text-center">
+            <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-[#15234d] sm:text-3xl">{t.videoTitle}</h2>
+            <p className="mx-auto mt-2 max-w-150 text-sm leading-relaxed text-[#4a5e8e]">{t.videoSub}</p>
+          </div>
+          <div className="mx-auto max-w-190 overflow-hidden rounded-3xl border border-violet-100 bg-white p-2 shadow-[0_12px_40px_rgba(69,83,160,.12)]">
+          <video
+            className="aspect-video max-h-[52vh] w-full rounded-2xl bg-slate-950 object-contain"
+            controls
+            playsInline
+            preload="metadata"
+            aria-label="Samvedna AI landing page introduction video"
+          >
+            <source src="/videos/landing-intro.mp4" type="video/mp4" />
+            Your browser does not support the video element.
+          </video>
+          </div>
+        </div>
+      </section>
 
       {/* ═══════════════════ FOOTER ═══════════════════ */}
       <footer id="resources" className="bg-linear-to-r from-[#f3f5ff] to-white">
