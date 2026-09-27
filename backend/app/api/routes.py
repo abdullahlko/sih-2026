@@ -137,6 +137,7 @@ async def register_admin(
 
     new_user = User(
         email=data.email,
+        phone_number=data.phone_number,
         hashed_password=get_password_hash(data.password),
         role=UserRole.ADMIN
     )

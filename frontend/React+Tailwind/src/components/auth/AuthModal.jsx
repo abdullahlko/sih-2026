@@ -41,6 +41,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', in
   const [counselorForm, setCounselorForm] = useState({
     full_name: '',
     email: '',
+    phone_number: '',
     password: '',
     district: '',
     specialization: 'Trauma & Psychological Relief'
@@ -50,6 +51,7 @@ export default function AuthModal({ isOpen, onClose, initialRole = 'citizen', in
   const [adminForm, setAdminForm] = useState({
     full_name: '',
     email: '',
+    phone_number: '',
     password: '',
     district: '',
     invite_code: ''
@@ -111,6 +113,7 @@ ${senderName}`;
         role: 'counselor',
         full_name: displayName,
         email: counselorForm.email || 'anita.sharma@samvedna.gov.in',
+        phone_number: counselorForm.phone_number || '+91 98765 12345',
         district: counselorForm.district || 'Alwar, Rajasthan',
         specialization: counselorForm.specialization || 'Trauma & Psychological Relief'
       };
@@ -120,6 +123,7 @@ ${senderName}`;
         role: 'admin',
         full_name: displayName,
         email: adminForm.email || 'admin.alwar@samvedna.gov.in',
+        phone_number: adminForm.phone_number || '+91 98990 54321',
         district: adminForm.district || 'Alwar, Rajasthan',
         invite_code: adminForm.invite_code || 'SEC-GOV-2026-X7'
       };
@@ -163,6 +167,7 @@ ${senderName}`;
       setCounselorForm({
         full_name: 'Dr. Anita Sharma',
         email: 'anita.sharma@samvedna.gov.in',
+        phone_number: '+91 98765 12345',
         password: '••••••••',
         district: 'Alwar, Rajasthan',
         specialization: 'Clinical Psychology & Trauma Relief'
@@ -172,6 +177,7 @@ ${senderName}`;
       setAdminForm({
         full_name: 'Rajesh Meena, IAS',
         email: 'admin.alwar@samvedna.gov.in',
+        phone_number: '+91 98990 54321',
         password: '••••••••',
         district: 'Alwar, Rajasthan',
         invite_code: 'SEC-GOV-2026-X7'
@@ -443,6 +449,23 @@ ${senderName}`;
                 <>
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Phone / Mobile Number (मोबाइल नंबर)
+                    </label>
+                    <div className="relative">
+                      <Phone size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="tel"
+                        required
+                        placeholder="e.g. +91 98765 12345"
+                        value={counselorForm.phone_number}
+                        onChange={(e) => setCounselorForm({ ...counselorForm, phone_number: e.target.value })}
+                        className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
                       District &amp; State Jurisdiction
                     </label>
                     <div className="relative">
@@ -543,6 +566,22 @@ ${senderName}`;
 
               {mode === 'register' && (
                 <>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                      Official Contact / Phone Number
+                    </label>
+                    <div className="relative">
+                      <Phone size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="tel"
+                        placeholder="e.g. +91 98990 54321"
+                        value={adminForm.phone_number}
+                        onChange={(e) => setAdminForm({ ...adminForm, phone_number: e.target.value })}
+                        className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:border-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-100 transition"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">
                       District Jurisdiction (Optional)
