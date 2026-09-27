@@ -36,7 +36,6 @@ class CounselorRegister(BaseModel):
     specialization: Optional[str] = None
 
 class AdminRegister(BaseModel):
-    phone_number: Optional[str] = None
     email: str
     password: str
     full_name: str
